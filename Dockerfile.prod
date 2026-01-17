@@ -1,0 +1,38 @@
+# =========================
+# 1️⃣ Build stage
+# =========================
+FROM oven/bun:alpine AS builder
+
+WORKDIR /app
+
+# Copy dependency files
+COPY bun.lock package.json ./
+
+# Install dependency (prod + build deps)
+RUN bun install --frozen-lockfile
+
+# Copy source code
+COPY . .
+
+# Build Nuxt
+RUN bun run build
+
+
+# =========================
+# 2️⃣ Runtime stage
+# =========================
+FROM oven/bun:alpine AS runner
+
+WORKDIR /app
+
+# Copy hasil build saja
+COPY --from=builder /app/.output ./.output
+
+# (opsional) copy package.json jika perlu metadata
+COPY --from=builder /app/package.json ./package.json
+
+# Dokumentasi port
+EXPOSE 3000
+
+# Jalankan Nuxt server
+CMD ["bun", ".output/server/index.mjs"]

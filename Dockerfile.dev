@@ -1,0 +1,21 @@
+# --- Development image ---
+FROM oven/bun:alpine AS dev
+
+# Set working directory
+WORKDIR /app
+
+# Salin file dependency dulu (untuk cache layer)
+COPY bun.lock package.json ./
+
+# Install dependency (dev deps included)
+RUN bun install
+
+# Salin source code
+# (akan dioverride oleh volume saat dev)
+COPY . .
+
+# Dokumentasi port default Nuxt
+EXPOSE 3000
+
+# Jalankan Nuxt dev server
+CMD ["bun", "run", "dev"]
