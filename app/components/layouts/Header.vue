@@ -35,8 +35,7 @@ const dropdownMenuitems = [
 <template>
   <UHeader mode="slideover">
     <template #title>
-      <AppLogo class="mr-1 scale-150" />
-      <h1>EduChronia</h1>
+      <AppLogo />
     </template>
 
     <template #right>
