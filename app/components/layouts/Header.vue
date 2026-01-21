@@ -1,18 +1,5 @@
 <script setup>
-const items = [
-  {
-    label: "Dashboard",
-    to: "/",
-  },
-  {
-    label: "Kursus",
-    to: "/courses",
-  },
-  {
-    label: "Tugas",
-    to: "/tasks",
-  },
-];
+import Navbar from "./Navbar.vue";
 
 const dropdownMenuitems = [
   [
@@ -39,11 +26,7 @@ const dropdownMenuitems = [
     </template>
 
     <template #right>
-      <UNavigationMenu
-        :items="items"
-        :highlight="true"
-        class="lg:mr-8 xl:mr-12 hidden lg:flex"
-      />
+      <Navbar class="lg:mr-8 xl:mr-12 hidden lg:flex" />
 
       <div class="flex gap-4">
         <UColorModeButton variant="soft" size="sm" class="p-2" />
@@ -61,12 +44,7 @@ const dropdownMenuitems = [
     </template>
 
     <template #body>
-      <UNavigationMenu
-        :items="items"
-        :highlight="true"
-        orientation="vertical"
-        class="-mx-2.5"
-      />
+      <Navbar orientation="vertical" />
     </template>
   </UHeader>
 </template>
