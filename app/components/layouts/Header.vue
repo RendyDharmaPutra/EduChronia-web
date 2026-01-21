@@ -13,6 +13,23 @@ const items = [
     to: "/tasks",
   },
 ];
+
+const dropdownMenuitems = [
+  [
+    {
+      label: "user@mail.com",
+      icon: "i-lucide-user",
+      type: "label",
+    },
+  ],
+  [
+    {
+      label: "Logout",
+      icon: "i-lucide-log-out",
+      color: "error",
+    },
+  ],
+];
 </script>
 
 <template>
@@ -32,18 +49,25 @@ const items = [
       <div class="flex gap-4">
         <UColorModeButton variant="soft" size="sm" class="p-2" />
 
-        <UButton
-          color="primary"
-          variant="solid"
-          icon="i-lucide-user"
-          aria-label="User"
-          class="rounded-full"
-        />
+        <UDropdownMenu :items="dropdownMenuitems">
+          <UButton
+            color="primary"
+            variant="solid"
+            icon="i-lucide-user"
+            aria-label="User"
+            class="rounded-full"
+          />
+        </UDropdownMenu>
       </div>
     </template>
 
     <template #body>
-      <UNavigationMenu :items="items" orientation="vertical" class="-mx-2.5" />
+      <UNavigationMenu
+        :items="items"
+        :highlight="true"
+        orientation="vertical"
+        class="-mx-2.5"
+      />
     </template>
   </UHeader>
 </template>
