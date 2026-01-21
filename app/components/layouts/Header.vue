@@ -1,22 +1,6 @@
-<script setup>
+<script setup lang="ts">
 import Navbar from "./Navbar.vue";
-
-const dropdownMenuitems = [
-  [
-    {
-      label: "user@mail.com",
-      icon: "i-lucide-user",
-      type: "label",
-    },
-  ],
-  [
-    {
-      label: "Logout",
-      icon: "i-lucide-log-out",
-      color: "error",
-    },
-  ],
-];
+import HeaderActions from "./HeaderActions.vue";
 </script>
 
 <template>
@@ -28,19 +12,7 @@ const dropdownMenuitems = [
     <template #right>
       <Navbar class="lg:mr-8 xl:mr-12 hidden lg:flex" />
 
-      <div class="flex gap-4">
-        <UColorModeButton variant="soft" size="sm" class="p-2" />
-
-        <UDropdownMenu :items="dropdownMenuitems">
-          <UButton
-            color="primary"
-            variant="solid"
-            icon="i-lucide-user"
-            aria-label="User"
-            class="rounded-full"
-          />
-        </UDropdownMenu>
-      </div>
+      <HeaderActions />
     </template>
 
     <template #body>
