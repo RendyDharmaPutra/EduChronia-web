@@ -1,8 +1,16 @@
 <script setup>
 const items = [
   {
-    label: "Home",
+    label: "Dashboard",
     to: "/",
+  },
+  {
+    label: "Kursus",
+    to: "/courses",
+  },
+  {
+    label: "Tugas",
+    to: "/tasks",
   },
 ];
 </script>
