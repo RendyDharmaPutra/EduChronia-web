@@ -4,6 +4,10 @@ export default defineNuxtConfig({
 
   devtools: {
     enabled: true,
+
+    timeline: {
+      enabled: true,
+    },
   },
 
   css: ["~/assets/css/main.css"],
@@ -25,7 +29,8 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL,
+      containerApiBaseUrl: process.env.NUXT_PUBLIC_CONTAINER_API_BASE_URL,
+      hostApiBaseUrl: process.env.NUXT_PUBLIC_HOST_API_BASE_URL,
     },
   },
 });

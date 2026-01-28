@@ -14,9 +14,20 @@ export async function apiFetch<T>(
 ): Promise<ApiFailed | ApiSuccess<T>> {
   const config = useRuntimeConfig();
 
+  const headers = import.meta.server
+    ? useRequestHeaders(["cookie"]) // ⭐ forward cookie dari browser
+    : undefined;
+
   try {
     return await $fetch<ApiFailed | ApiSuccess<T>>(url, {
-      baseURL: config.public.apiBaseUrl as string,
+      baseURL: import.meta.server
+        ? config.public.containerApiBaseUrl
+        : config.public.hostApiBaseUrl,
+      credentials: "include",
+      headers: {
+        ...headers,
+        ...options.headers,
+      },
       ...options,
     });
   } catch (error: any) {
