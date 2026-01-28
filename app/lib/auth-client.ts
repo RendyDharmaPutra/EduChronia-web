@@ -1,6 +1,6 @@
 import { createAuthClient } from "better-auth/client";
 
-export function useAuthClient() {
+export function createAuthClientInstance() {
   const config = useRuntimeConfig();
 
   return createAuthClient({

@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { useAuthClient } from "~/lib/auth-client";
+import { useAuthClient } from "../composables/useAuthClient";
 
 const handleLogin = async () => {
-  const authClient = useAuthClient();
+  const { signIn } = useAuthClient();
 
-  await authClient.signIn.social({
+  await signIn.social({
     provider: "google",
     callbackURL: "http://localhost:3000/",
   });

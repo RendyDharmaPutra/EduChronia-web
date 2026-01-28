@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useAuthClient } from "~/lib/auth-client";
 import { apiFetch } from "~/lib/fetcher";
+import { useAuthClient } from "../composables/useAuthClient";
 
 definePageMeta({
   middleware: "auth",
@@ -17,9 +17,9 @@ console.info(`Data: ${JSON.stringify(data.value)}`);
 console.info(`Error: ${JSON.stringify(errorResponse.value)}`);
 
 const handleLogout = async () => {
-  const authClient = useAuthClient();
+  const { signOut } = useAuthClient();
 
-  await authClient.signOut();
+  await signOut();
 
   const authStore = useAuthStore();
   authStore.destroy();

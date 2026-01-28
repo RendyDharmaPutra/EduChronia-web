@@ -1,14 +1,13 @@
 import type { ApiFailed, ApiSuccess } from "~/types/api";
 import type { AuthUser } from "~/types/auth/auth-user";
-import { useAuthClient } from "~/lib/auth-client";
 
 export const getAuthUser = async (): Promise<
   ApiFailed | ApiSuccess<AuthUser>
 > => {
-  const authClient = useAuthClient();
+  const { $authClient } = useNuxtApp();
 
   try {
-    const authSessionResult = await authClient.getSession();
+    const authSessionResult = await $authClient.getSession();
 
     if (authSessionResult.error)
       throw new Error(authSessionResult.error.message); // ? Not yet testing the possibility of an error
