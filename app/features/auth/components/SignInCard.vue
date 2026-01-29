@@ -1,14 +1,5 @@
 <script setup lang="ts">
-import { useAuthClient } from "~/composables/useAuthClient";
-
-const handleLogin = async () => {
-  const { signIn } = useAuthClient();
-
-  await signIn.social({
-    provider: "google",
-    callbackURL: "http://localhost:3000/",
-  });
-};
+import { signIn } from "~/features/auth/services/sign-in.service";
 </script>
 
 <template>
@@ -31,7 +22,7 @@ const handleLogin = async () => {
     <UButton
       variant="solid"
       class="w-full h-11 flex items-center justify-center gap-3 cursor-pointer"
-      @click="handleLogin"
+      @click="signIn"
     >
       <svg
         class="w-5 h-5"
