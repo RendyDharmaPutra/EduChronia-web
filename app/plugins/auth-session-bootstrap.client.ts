@@ -1,4 +1,4 @@
-import { getAuthUser } from "../services/auth/get-session.service";
+import { getAuthUser } from "../features/auth/services/get-session.service";
 import { useAuthStore } from "~/stores/auth.store";
 
 export default defineNuxtPlugin(async () => {
