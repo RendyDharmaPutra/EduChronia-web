@@ -1,17 +1,20 @@
 <script setup lang="ts">
 import { signOut } from "~/features/auth/services/sign-out.service";
 
+const authStore = useAuthStore();
+const { user } = storeToRefs(authStore);
+
 const dropdownMenuitems = [
   [
     {
-      label: "user@mail.com", // TODO: change to user email
+      label: user.value?.email!,
       icon: "i-lucide-user",
       type: "label",
     },
   ],
   [
     {
-      label: "Logout",
+      label: "Keluar",
       icon: "i-lucide-log-out",
       color: "error",
       onClick: signOut,
@@ -28,9 +31,19 @@ const dropdownMenuitems = [
       <UButton
         color="primary"
         variant="solid"
-        icon="i-lucide-user"
         aria-label="User"
-        class="rounded-full"
+        size="md"
+        :avatar="{
+          src: user?.image!,
+          icon: 'i-lucide-user', // Alternative content if image is not available
+          ui: {
+            icon: 'size-5 bg-muted',
+          },
+        }"
+        :ui="{
+          base: 'p-0 rounded-full cursor-pointer hover:brightness-75 transition-all duration-300',
+          leadingAvatar: 'size-8 bg-primary',
+        }"
       />
     </UDropdownMenu>
   </div>
