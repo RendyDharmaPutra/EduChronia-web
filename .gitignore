@@ -4,6 +4,8 @@
 .nuxt
 .nitro
 .cache
+.pnpm-store
+.pnpm
 dist
 
 # Node dependencies
