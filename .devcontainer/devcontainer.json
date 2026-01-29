@@ -13,5 +13,5 @@
     }
   },
   "remoteUser": "root",
-  "postCreateCommand": "pnpm install"
+  "postCreateCommand": "bun install",
 }
