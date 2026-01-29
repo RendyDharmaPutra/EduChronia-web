@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { useAuthClient } from "../composables/useAuthClient";
 
+definePageMeta({
+  middleware: "guest",
+});
+
 const handleLogin = async () => {
   const { signIn } = useAuthClient();
 

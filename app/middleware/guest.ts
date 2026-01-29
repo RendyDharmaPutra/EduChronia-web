@@ -1,5 +1,5 @@
 export default defineNuxtRouteMiddleware(() => {
-  console.trace("auth middleware");
+  console.trace("guest middleware");
 
   const authStore = useAuthStore();
 
@@ -8,5 +8,5 @@ export default defineNuxtRouteMiddleware(() => {
   console.debug(`user: ${authStore.user}`);
   console.debug(`isAuthenticated: ${authStore.isAuthenticated}`);
 
-  if (!authStore.isAuthenticated) return navigateTo("/sign-in");
+  if (authStore.isAuthenticated) return navigateTo("/");
 });
