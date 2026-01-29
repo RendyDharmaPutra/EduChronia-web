@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import Navbar from "./Navbar.vue";
 import HeaderActions from "./HeaderActions.vue";
+import AppTitle from "~/components/AppTitle.vue";
 </script>
 
 <template>
   <UHeader mode="slideover">
     <template #title>
-      <AppLogo />
+      <AppTitle />
     </template>
 
     <template #right>

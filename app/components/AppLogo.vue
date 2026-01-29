@@ -1,16 +1,17 @@
+<script setup lang="ts"></script>
+
 <template>
-  <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    class="mr-1 scale-150"
-  >
-    <path
-      d="M12 2L13.8 8.2L20 10L13.8 11.8L12 18L10.2 11.8L4 10L10.2 8.2L12 2Z"
-      fill="var(--ui-primary)"
-    />
-  </svg>
-  <h1>EduChronia</h1>
+  <div class="size-8 text-primary">
+    <svg
+      class="w-full h-full"
+      fill="none"
+      viewBox="0 0 48 48"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M24 4C25.7818 14.2173 33.7827 22.2182 44 24C33.7827 25.7818 25.7818 33.7827 24 44C22.2182 33.7827 14.2173 25.7818 4 24C14.2173 22.2182 22.2182 14.2173 24 4Z"
+        fill="var(--ui-primary)"
+      ></path>
+    </svg>
+  </div>
 </template>
