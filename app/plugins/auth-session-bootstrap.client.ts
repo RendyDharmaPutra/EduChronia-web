@@ -1,12 +1,8 @@
-import { createAuthClientInstance } from "~/lib/auth-client";
 import { getAuthUser } from "../services/auth/get-session.service";
 import { useAuthStore } from "~/stores/auth.store";
 
-export default defineNuxtPlugin(async (nuxtApp) => {
-  console.trace("PLUGIN");
-
-  const authClient = createAuthClientInstance();
-  nuxtApp.provide("authClient", authClient);
+export default defineNuxtPlugin(async () => {
+  console.trace("AUTH SESSION PLUGIN");
 
   const authUserResult = await getAuthUser();
   const authStore = useAuthStore();
