@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { signOut } from "~/features/auth/services/sign-out.service";
+
 const dropdownMenuitems = [
   [
     {
@@ -12,7 +14,7 @@ const dropdownMenuitems = [
       label: "Logout",
       icon: "i-lucide-log-out",
       color: "error",
-      // TODO: add logout action
+      onClick: signOut,
     },
   ],
 ];
