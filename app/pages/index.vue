@@ -30,4 +30,11 @@ const handleLogout = async () => {
 <template>
   <NuxtLink to="/sign-in">Login</NuxtLink>
   <UButton @click="handleLogout">Logout</UButton>
+  <div v-if="status === 'pending'">Loading...</div>
+
+  <div v-else-if="status === 'error'">Error: {{ errorResponse }}</div>
+
+  <pre v-else>
+    {{ data }}
+  </pre>
 </template>
