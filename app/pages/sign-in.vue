@@ -1,20 +1,18 @@
 <script setup lang="ts">
-import { useAuthClient } from "../composables/useAuthClient";
+import AppTitle from "~/components/AppTitle.vue";
+import SignInCard from "~/features/auth/components/SignInCard.vue";
 
 definePageMeta({
   middleware: "guest",
+  layout: false,
 });
-
-const handleLogin = async () => {
-  const { signIn } = useAuthClient();
-
-  await signIn.social({
-    provider: "google",
-    callbackURL: "http://localhost:3000/",
-  });
-};
 </script>
 
 <template>
-  <UButton @click="handleLogin">Sign In</UButton>
+  <UContainer
+    class="flex flex-col items-center justify-center space-y-8 w-full min-h-screen"
+  >
+    <AppTitle />
+    <SignInCard />
+  </UContainer>
 </template>
