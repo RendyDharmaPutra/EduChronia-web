@@ -12,8 +12,17 @@ export default defineNuxtConfig({
 
   css: ["~/assets/css/main.css"],
 
+  ssr: false,
   routeRules: {
-    "/": { prerender: true },
+    // TODO: make SSG for landing page
+    // "/": { prerender: true },
+  },
+  app: {
+    head: {
+      title: "EduChronia",
+      charset: "utf-16",
+      viewport: "width=device-width, initial-scale=1, maximum-scale=1",
+    },
   },
 
   compatibilityDate: "2025-01-15",
