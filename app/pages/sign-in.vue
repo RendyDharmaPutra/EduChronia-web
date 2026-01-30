@@ -5,11 +5,22 @@ import { usePageMeta } from "../composables/usePageMeta";
 
 definePageMeta({
   middleware: "guest",
-  layout: false,
+  layout: "default",
 });
 
 usePageMeta({
   title: "Sign In",
+});
+
+onMounted(() => {
+  const flash = useState("auth-flash");
+  const toast = useToast();
+
+  if (flash.value) {
+    toast.add({ ...flash.value, icon: "i-lucide-alert-circle" });
+
+    flash.value = null;
+  }
 });
 </script>
 
