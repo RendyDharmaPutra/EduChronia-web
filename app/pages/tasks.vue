@@ -2,6 +2,10 @@
 definePageMeta({
   middleware: "auth",
 });
+
+usePageMeta({
+  title: "Tugas",
+});
 </script>
 
 <template>

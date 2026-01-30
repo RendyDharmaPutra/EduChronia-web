@@ -1,4 +1,7 @@
 <script setup lang="ts">
+usePageMeta({
+  title: "Kursus",
+});
 definePageMeta({
   middleware: "auth",
 });

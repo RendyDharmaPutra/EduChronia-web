@@ -6,6 +6,10 @@ definePageMeta({
   middleware: "auth",
 });
 
+usePageMeta({
+  title: "Dashboard",
+});
+
 const {
   data,
   error: errorResponse,
@@ -22,7 +26,7 @@ console.info(`Error: ${JSON.stringify(errorResponse.value)}`);
   <UButton @click="signOut">Logout</UButton>
   <div v-if="status === 'pending'">Loading...</div>
 
-  <div v-else-if="status === 'error'">Error: {{ errorResponse }}</div>
+  <div v-else-if="status === 'error'">Error: {{ errorResponse?.data }}</div>
 
   <pre v-else>
     {{ data }}

@@ -1,10 +1,15 @@
 <script setup lang="ts">
 import AppTitle from "~/components/AppTitle.vue";
 import SignInCard from "~/features/auth/components/SignInCard.vue";
+import { usePageMeta } from "../composables/usePageMeta";
 
 definePageMeta({
   middleware: "guest",
   layout: false,
+});
+
+usePageMeta({
+  title: "Sign In",
 });
 </script>
 
