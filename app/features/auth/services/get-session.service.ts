@@ -23,7 +23,6 @@ export const getAuthUser = async (): Promise<
       };
 
     const user = authSessionResult.data.user;
-    console.debug(`user: ${JSON.stringify(user)}`);
 
     return {
       success: true,
