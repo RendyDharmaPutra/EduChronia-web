@@ -17,7 +17,11 @@ onMounted(() => {
   const toast = useToast();
 
   if (flash.value) {
-    toast.add({ ...flash.value, icon: "i-lucide-alert-circle" });
+    toast.add({
+      ...flash.value,
+      icon: "i-lucide-alert-circle",
+      progress: false,
+    });
 
     flash.value = null;
   }
