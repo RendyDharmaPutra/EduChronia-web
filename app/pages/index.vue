@@ -4,7 +4,6 @@ import { signOut } from "~/features/auth/services/sign-out.service";
 
 definePageMeta({
   middleware: "auth",
-  layout: "app",
 });
 
 usePageMeta({
