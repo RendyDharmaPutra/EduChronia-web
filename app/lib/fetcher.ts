@@ -14,20 +14,12 @@ export async function apiFetch<T>(
 ): Promise<ApiFailed | ApiSuccess<T>> {
   const config = useRuntimeConfig();
 
-  try {
-    return await $fetch<ApiFailed | ApiSuccess<T>>(url, {
-      baseURL: config.public.apiBaseUrl as string,
-      ...options,
-    });
-  } catch (error: any) {
-    console.error("Error while fetching data", error); // TODO: Change to logger warning / fatal
-
-    return {
-      success: false,
-      error: {
-        type: "INTERNAL_SERVER_ERROR",
-        message: error?.response?._data?.message ?? "Error while fetching data",
-      },
-    } satisfies ApiFailed;
-  }
+  return await $fetch<ApiFailed | ApiSuccess<T>>(url, {
+    baseURL: config.public.hostApiBaseUrl,
+    credentials: "include",
+    headers: {
+      ...options.headers,
+    },
+    ...options,
+  });
 }

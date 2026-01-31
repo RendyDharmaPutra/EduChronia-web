@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import Header from "~/components/layouts/header/Header.vue";
 import Footer from "~/components/layouts/footer/Footer.vue";
+
+definePageMeta({
+  layout: "main",
+});
 </script>
 
 <template>
-  <UApp>
-    <Header />
-    <UMain>
-      <slot />
-    </UMain>
-    <Footer />
-  </UApp>
+  <Header />
+  <UMain>
+    <slot />
+  </UMain>
+  <Footer />
 </template>
