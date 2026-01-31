@@ -38,7 +38,6 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      containerApiBaseUrl: process.env.NUXT_PUBLIC_CONTAINER_API_BASE_URL,
       hostApiBaseUrl: process.env.NUXT_PUBLIC_HOST_API_BASE_URL,
     },
   },
