@@ -2,6 +2,7 @@
 import CourseFormModal from "~/features/courses/components/CourseFormModal.vue";
 import type { CourseSchemaType } from "~/features/courses/course.schema";
 import { createCourseService } from "~/features/courses/services/create-course.service";
+import { useFormState } from "~/composables/useFormState";
 
 definePageMeta({
   middleware: "auth",
@@ -12,15 +13,10 @@ usePageMeta({
 });
 
 const open = ref(false);
-const state = reactive<Partial<CourseSchemaType>>({
+const { formState, resetFormState } = useFormState<CourseSchemaType>(() => ({
   name: "",
   description: "",
-});
-
-const resetForm = () => {
-  state.name = "";
-  state.description = "";
-};
+}));
 </script>
 
 <template>
