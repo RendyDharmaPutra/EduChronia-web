@@ -11,8 +11,42 @@ defineProps<{
 
 const emit = defineEmits<{
   (event: "update:open", value: boolean): void;
-  (event: "submit", e: FormSubmitEvent<CourseSchemaType>): void;
 }>();
+
+const toast = useToast();
+const isSubmitting = ref(false);
+
+const handleSubmit = (event: FormSubmitEvent<CourseSchemaType>) => {
+  if (isSubmitting.value) return; // Prevent multiple submissions
+
+  isSubmitting.value = true;
+
+  // Trace & debug
+  console.trace("EVENT SUBMIT");
+  console.debug(event.data);
+
+  //** TODO: Call API to create/update course based on props
+  // IF success:
+  // - show success toast
+  // - close modal
+  // - clear form input
+  // - refresh courses list
+  //
+  // IF error:
+  // - show error toast
+  // - keep modal open
+  //
+  // Change submitting state to false */
+
+  // Placeholder
+  toast.add({
+    title: "Kursus berhasil disimpan",
+    description: "Kursus telah berhasil disimpan",
+    color: "success",
+  });
+
+  isSubmitting.value = false;
+};
 </script>
 
 <template>
@@ -29,7 +63,7 @@ const emit = defineEmits<{
         id="course-form"
         :schema="courseSchema"
         :state="state"
-        @submit="$emit('submit', $event)"
+        @submit="handleSubmit"
         class="space-y-4"
       >
         <UFormField label="Nama" name="name" size="lg">
@@ -52,9 +86,16 @@ const emit = defineEmits<{
         variant="ghost"
         color="neutral"
         type="button"
+        :disabled="isSubmitting"
         @click="emit('update:open', false)"
       />
-      <UButton label="Simpan Kursus" type="submit" form="course-form" />
+      <UButton
+        label="Simpan Kursus"
+        type="submit"
+        form="course-form"
+        :loading="isSubmitting"
+        :disabled="isSubmitting"
+      />
     </template>
   </UModal>
 </template>

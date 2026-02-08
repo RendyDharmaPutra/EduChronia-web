@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type { FormSubmitEvent } from "@nuxt/ui";
 import CourseFormModal from "~/features/courses/components/CourseFormModal.vue";
 import type { CourseSchemaType } from "~/features/courses/course.schema";
 
@@ -16,11 +15,6 @@ const state = reactive<Partial<CourseSchemaType>>({
   name: "",
   description: "",
 });
-
-const onSubmit = (event: FormSubmitEvent<CourseSchemaType>) => {
-  console.log("EVENT SUBMIT");
-  console.debug(event.data);
-};
 </script>
 
 <template>
@@ -30,6 +24,5 @@ const onSubmit = (event: FormSubmitEvent<CourseSchemaType>) => {
     v-model:open="open"
     :title="'Tambah Kursus'"
     :state="state"
-    @submit="onSubmit"
   />
 </template>
