@@ -2,13 +2,16 @@
 import type { FormSubmitEvent } from "@nuxt/ui";
 import type { CourseSchemaType } from "../course.schema";
 import { courseSchema } from "../course.schema";
-import { createCourseService } from "../services/create-course.service";
 import { useAppToast } from "~/composables/useAppToast";
+import type { ApiFailed, ApiSuccess } from "~/types/api";
 
-defineProps<{
+const props = defineProps<{
   title: "Tambah Kursus" | "Ubah Kursus";
   open: boolean;
   state: Partial<CourseSchemaType>;
+  onSubmit: (
+    payload: CourseSchemaType,
+  ) => Promise<ApiSuccess<CourseSchemaType> | ApiFailed>;
 }>();
 
 const emit = defineEmits<{
@@ -28,8 +31,7 @@ const handleSubmit = async (event: FormSubmitEvent<CourseSchemaType>) => {
   console.trace("EVENT SUBMIT");
   console.debug(event.data);
 
-  //** TODO: Call API to create/update course based on props
-  const result = await createCourseService(event.data);
+  const result = await props.onSubmit(event.data);
 
   if (!result.success) {
     toast.error("Gagal menyimpan kursus", result.error.message);

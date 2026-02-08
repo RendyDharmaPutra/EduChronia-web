@@ -1,4 +1,3 @@
-// composables/ui/useAppToast.ts
 export function useAppToast() {
   const toast = useToast();
 
