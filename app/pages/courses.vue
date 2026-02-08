@@ -15,6 +15,11 @@ const state = reactive<Partial<CourseSchemaType>>({
   name: "",
   description: "",
 });
+
+const resetForm = () => {
+  state.name = "";
+  state.description = "";
+};
 </script>
 
 <template>
@@ -24,5 +29,6 @@ const state = reactive<Partial<CourseSchemaType>>({
     v-model:open="open"
     :title="'Tambah Kursus'"
     :state="state"
+    @reset-form="resetForm"
   />
 </template>
