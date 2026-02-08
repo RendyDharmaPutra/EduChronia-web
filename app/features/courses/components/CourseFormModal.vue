@@ -2,6 +2,7 @@
 import type { FormSubmitEvent } from "@nuxt/ui";
 import type { CourseSchemaType } from "../course.schema";
 import { courseSchema } from "../course.schema";
+import { createCourseService } from "../services/create-course.service";
 
 defineProps<{
   title: "Tambah Kursus" | "Ubah Kursus";
@@ -16,7 +17,7 @@ const emit = defineEmits<{
 const toast = useToast();
 const isSubmitting = ref(false);
 
-const handleSubmit = (event: FormSubmitEvent<CourseSchemaType>) => {
+const handleSubmit = async (event: FormSubmitEvent<CourseSchemaType>) => {
   if (isSubmitting.value) return; // Prevent multiple submissions
 
   isSubmitting.value = true;
@@ -26,25 +27,32 @@ const handleSubmit = (event: FormSubmitEvent<CourseSchemaType>) => {
   console.debug(event.data);
 
   //** TODO: Call API to create/update course based on props
+  const result = await createCourseService(event.data);
+
+  if (!result.success) {
+    toast.add({
+      title: "Gagal membuat kursus",
+      description: result.error.message,
+      color: "error",
+    });
+
+    isSubmitting.value = false;
+    return;
+  }
+
   // IF success:
   // - show success toast
-  // - close modal
-  // - clear form input
-  // - refresh courses list
-  //
-  // IF error:
-  // - show error toast
-  // - keep modal open
-  //
-  // Change submitting state to false */
-
-  // Placeholder
   toast.add({
     title: "Kursus berhasil disimpan",
-    description: "Kursus telah berhasil disimpan",
     color: "success",
   });
+  // - close modal
+  emit("update:open", false);
+  // - clear form input
+  // - refresh courses list
+  refreshNuxtData("courses");
 
+  // Change submitting state to false */
   isSubmitting.value = false;
 };
 </script>
