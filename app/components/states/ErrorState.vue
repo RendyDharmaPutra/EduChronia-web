@@ -1,13 +1,3 @@
-<template>
-  <StateView
-    icon="i-heroicons-exclamation-circle"
-    :title="props.title"
-    :description="props.description"
-    :action-label="props.actionLabel"
-    @retry="$emit('retry')"
-  />
-</template>
-
 <script lang="ts" setup>
 import StateView from "./StateView.vue";
 
@@ -28,3 +18,26 @@ defineEmits<{
   (e: "retry"): void;
 }>();
 </script>
+
+<template>
+  <StateView
+    icon="i-heroicons-exclamation-circle"
+    :title="props.title"
+    :description="props.description"
+    color="neutral"
+  >
+    <UButton
+      v-if="actionLabel"
+      icon="i-lucide-rotate-cw"
+      :label="actionLabel"
+      variant="outline"
+      color="neutral"
+      size="xl"
+      @click="$emit('retry')"
+      :ui="{
+        label: 'text-sm',
+        leadingIcon: 'size-4',
+      }"
+    />
+  </StateView>
+</template>

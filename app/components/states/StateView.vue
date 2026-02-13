@@ -1,14 +1,17 @@
 <script setup lang="ts">
-defineProps<{
-  icon: string;
-  title: string;
-  description: string;
-  actionLabel?: string;
-}>();
+const props = withDefaults(
+  defineProps<{
+    icon: string;
+    title: string;
+    description: string;
+    color?: "primary" | "neutral" | "info" | "success" | "warning" | "error";
+  }>(),
+  {
+    color: "primary",
+  },
+);
 
-defineEmits<{
-  (e: "retry"): void;
-}>();
+const bgColor = props.color === "neutral" ? "bg-muted" : `bg-${props.color}/10`;
 </script>
 
 <template>
@@ -16,32 +19,23 @@ defineEmits<{
     class="flex flex-col items-center justify-center max-w-sm md:max-w-md w-full text-center"
   >
     <div
-      class="mb-6 flex items-center justify-center rounded-full w-16 h-16 md:w-20 md:h-20 bg-muted"
+      :class="`mb-6 flex items-center justify-center rounded-full w-16 h-16 md:w-20 md:h-20 ${bgColor}`"
     >
-      <UIcon :name="icon" class="text-4xl md:text-5xl" />
+      <UIcon
+        :name="props.icon"
+        :class="`text-4xl md:text-5xl text-${props.color}`"
+      />
     </div>
 
     <div class="mb-8 flex flex-col space-y-3">
       <h4 class="font-bold text-xl md:text-2xl">
-        {{ title }}
+        {{ props.title }}
       </h4>
       <p class="text-toned leading-relaxed">
-        {{ description }}
+        {{ props.description }}
       </p>
     </div>
 
-    <UButton
-      v-if="actionLabel"
-      icon="i-lucide-rotate-cw"
-      :label="actionLabel"
-      variant="outline"
-      color="neutral"
-      size="xl"
-      @click="$emit('retry')"
-      :ui="{
-        label: 'text-sm',
-        leadingIcon: 'size-4',
-      }"
-    />
+    <slot />
   </section>
 </template>
