@@ -4,8 +4,7 @@ import type { CourseSchemaType } from "~/features/courses/course.schema";
 import { createCourseService } from "~/features/courses/services/create-course.service";
 import { useFormState } from "~/composables/useFormState";
 import CoursePageHeader from "~/features/courses/components/CoursePageHeader.vue";
-import ErrorState from "~/components/states/ErrorState.vue";
-import EmptyState from "~/components/states/EmptyState.vue";
+import CoursePageContent from "~/features/courses/components/CoursePageContent.vue";
 
 definePageMeta({
   middleware: "auth",
@@ -26,20 +25,7 @@ const { formState, resetFormState } = useFormState<CourseSchemaType>(() => ({
   <UContainer class="flex flex-col items-center space-y-8">
     <CoursePageHeader @add-course="open = true" />
 
-    <EmptyState
-      icon="i-heroicons-book-open"
-      title="Belum ada kursus"
-      description="Mulai perjalanan belajar Anda dengan membuat kursus pertama."
-      action-label="Buat Kursus"
-      @action="open = true"
-    />
-
-    <ErrorState
-      title="Gagal memuat daftar kursus"
-      description="Terjadi kendala koneksi atau masalah teknis. Silakan coba lagi nanti."
-      action-label="Muat Ulang"
-      @retry="$emit('retry')"
-    />
+    <CoursePageContent @empty-action="open = true" />
 
     <CourseFormModal
       v-model:open="open"
