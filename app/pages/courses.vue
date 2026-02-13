@@ -22,7 +22,7 @@ const { formState, resetFormState } = useFormState<CourseSchemaType>(() => ({
 </script>
 
 <template>
-  <UContainer class="flex flex-col items-center space-y-8">
+  <UContainer class="flex flex-col items-center">
     <CoursePageHeader @add-course="open = true" />
 
     <CoursePageContent @empty-action="open = true" />

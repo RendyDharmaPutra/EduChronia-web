@@ -2,15 +2,39 @@
 import EmptyState from "~/components/states/EmptyState.vue";
 import ErrorState from "~/components/states/ErrorState.vue";
 import LoadingState from "~/components/states/LoadingState.vue";
+import CourseListItem from "./CourseListItem.vue";
 
 defineEmits<{ (e: "empty-action"): void }>();
+
+// Dummy data
+const courses = [
+  {
+    id: 1,
+    name: "Belajar Vue.js 3 dari Dasar",
+    description:
+      "Pelajari konsep dasar Vue.js 3, Composition API, dan cara membangun aplikasi web modern yang reaktif dan efisien mulai dari nol.",
+  },
+  {
+    id: 2,
+    name: "Mastering Nuxt 3",
+    description:
+      "Bangun aplikasi web performa tinggi dengan Nuxt 3, mulai dari routing, state management, hingga deployment.",
+  },
+  {
+    id: 3,
+    name: "Tailwind CSS untuk Pemula",
+    description:
+      "Desain antarmuka web yang cantik dan responsif dengan cepat menggunakan utility-first CSS framework Tailwind CSS.",
+  },
+];
 </script>
 
 <template>
   <section class="py-20 flex flex-col items-center justify-center w-full">
     <!-- TODO: conditional rendering based on state -->
+    <CourseListItem :courses="courses" />
 
-    <LoadingState />
+    <!-- <LoadingState /> -->
 
     <!-- <EmptyState
       icon="i-heroicons-book-open"
