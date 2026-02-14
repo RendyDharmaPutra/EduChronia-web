@@ -91,27 +91,32 @@ const coursesDummy: Course[] = [
 <template>
   <section class="py-20 flex flex-col items-center justify-center w-full">
     <!-- TODO: conditional rendering based on state -->
-    <CourseListData
-      v-model:page="currentPage"
-      :courses="coursesDummy"
-      :items-per-page="itemsPerPage"
-      :total-items="totalItems"
+
+    <LoadingState v-if="pending" />
+
+    <ErrorState
+      v-else-if="error || courses?.success === false"
+      title="Gagal memuat daftar kursus"
+      description="Terjadi kendala koneksi atau masalah teknis. Silakan coba lagi nanti."
+      action-label="Muat Ulang"
+      @action="refresh"
     />
 
-    <!-- <LoadingState /> -->
-
-    <!-- <EmptyState
+    <EmptyState
+      v-else-if="courses?.data.length === 0"
       icon="i-heroicons-book-open"
       title="Belum ada kursus"
       description="Mulai perjalanan belajar Anda dengan membuat kursus pertama."
       action-label="Buat Kursus"
       @action="$emit('empty-action')"
-    /> -->
+    />
 
-    <!-- <ErrorState
-      title="Gagal memuat daftar kursus"
-      description="Terjadi kendala koneksi atau masalah teknis. Silakan coba lagi nanti."
-      action-label="Muat Ulang"
-    /> -->
+    <CourseListData
+      v-else
+      v-model:page="currentPage"
+      :courses="courses?.data!"
+      :items-per-page="itemsPerPage"
+      :total-items="totalItems"
+    />
   </section>
 </template>
