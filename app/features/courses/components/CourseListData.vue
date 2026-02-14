@@ -2,6 +2,7 @@
 import CourseCard from "./CourseCard.vue";
 import type { CourseSchemaType } from "../course.schema";
 
+// TODO: Update CourseSchemaType to include id after updating backend
 interface CourseWithId extends CourseSchemaType {
   id: number;
 }

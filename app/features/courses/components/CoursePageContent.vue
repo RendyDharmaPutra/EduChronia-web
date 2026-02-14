@@ -2,7 +2,7 @@
 import EmptyState from "~/components/states/EmptyState.vue";
 import ErrorState from "~/components/states/ErrorState.vue";
 import LoadingState from "~/components/states/LoadingState.vue";
-import CourseListItem from "./CourseListItem.vue";
+import CourseListData from "./CourseListData.vue";
 
 defineEmits<{ (e: "empty-action"): void }>();
 
@@ -32,7 +32,7 @@ const courses = [
 <template>
   <section class="py-20 flex flex-col items-center justify-center w-full">
     <!-- TODO: conditional rendering based on state -->
-    <CourseListItem :courses="courses" />
+    <CourseListData :courses="courses" />
 
     <!-- <LoadingState /> -->
 
