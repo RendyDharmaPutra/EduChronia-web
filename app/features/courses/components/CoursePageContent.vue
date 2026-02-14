@@ -23,75 +23,12 @@ const {
   },
 );
 
+// Debug
 console.debug(`Courses: ${JSON.stringify(courses.value)}`);
-
-// TODO: Change based on API response
-const itemsPerPage = 10;
-const totalItems = 100;
-
-// Dummy data
-const coursesDummy: Course[] = [
-  {
-    id: 1,
-    name: "Belajar Vue.js 3 dari Dasar",
-    description:
-      "Pelajari konsep dasar Vue.js 3, Composition API, dan cara membangun aplikasi web modern yang reaktif dan efisien mulai dari nol.",
-  },
-  {
-    id: 2,
-    name: "Mastering Nuxt 3",
-    description:
-      "Bangun aplikasi web performa tinggi dengan Nuxt 3, mulai dari routing, state management, hingga deployment.",
-  },
-  {
-    id: 3,
-    name: "Tailwind CSS untuk Pemula",
-    description:
-      "Desain antarmuka web yang cantik dan responsif dengan cepat menggunakan utility-first CSS framework Tailwind CSS.",
-  },
-  {
-    id: 1,
-    name: "Belajar Vue.js 3 dari Dasar",
-    description:
-      "Pelajari konsep dasar Vue.js 3, Composition API, dan cara membangun aplikasi web modern yang reaktif dan efisien mulai dari nol.",
-  },
-  {
-    id: 2,
-    name: "Mastering Nuxt 3",
-    description:
-      "Bangun aplikasi web performa tinggi dengan Nuxt 3, mulai dari routing, state management, hingga deployment.",
-  },
-  {
-    id: 3,
-    name: "Tailwind CSS untuk Pemula",
-    description:
-      "Desain antarmuka web yang cantik dan responsif dengan cepat menggunakan utility-first CSS framework Tailwind CSS.",
-  },
-  {
-    id: 1,
-    name: "Belajar Vue.js 3 dari Dasar",
-    description:
-      "Pelajari konsep dasar Vue.js 3, Composition API, dan cara membangun aplikasi web modern yang reaktif dan efisien mulai dari nol.",
-  },
-  {
-    id: 2,
-    name: "Mastering Nuxt 3",
-    description:
-      "Bangun aplikasi web performa tinggi dengan Nuxt 3, mulai dari routing, state management, hingga deployment.",
-  },
-  {
-    id: 3,
-    name: "Tailwind CSS untuk Pemula",
-    description:
-      "Desain antarmuka web yang cantik dan responsif dengan cepat menggunakan utility-first CSS framework Tailwind CSS.",
-  },
-];
 </script>
 
 <template>
   <section class="py-20 flex flex-col items-center justify-center w-full">
-    <!-- TODO: conditional rendering based on state -->
-
     <LoadingState v-if="pending" />
 
     <ErrorState
@@ -103,7 +40,7 @@ const coursesDummy: Course[] = [
     />
 
     <EmptyState
-      v-else-if="courses?.data.length === 0"
+      v-else-if="courses!.data.length === 0"
       icon="i-heroicons-book-open"
       title="Belum ada kursus"
       description="Mulai perjalanan belajar Anda dengan membuat kursus pertama."
@@ -114,9 +51,9 @@ const coursesDummy: Course[] = [
     <CourseListData
       v-else
       v-model:page="currentPage"
-      :courses="courses?.data!"
-      :items-per-page="itemsPerPage"
-      :total-items="totalItems"
+      :courses="courses!.data"
+      :items-per-page="courses!.meta.pagination.limit"
+      :total-items="courses!.meta.pagination.total"
     />
   </section>
 </template>
