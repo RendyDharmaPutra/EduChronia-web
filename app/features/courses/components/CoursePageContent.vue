@@ -4,17 +4,33 @@ import ErrorState from "~/components/states/ErrorState.vue";
 import LoadingState from "~/components/states/LoadingState.vue";
 import CourseListData from "./CourseListData.vue";
 import type { Course } from "../course.type";
+import { readCourseListService } from "../services/read-course-list.service";
 
 defineEmits<{ (e: "empty-action"): void }>();
 
 const currentPage = ref(1);
+
+const {
+  data: courses,
+  pending,
+  error,
+  refresh,
+} = await useAsyncData(
+  "course-list",
+  () => readCourseListService(currentPage.value),
+  {
+    watch: [currentPage],
+  },
+);
+
+console.debug(`Courses: ${JSON.stringify(courses.value)}`);
 
 // TODO: Change based on API response
 const itemsPerPage = 10;
 const totalItems = 100;
 
 // Dummy data
-const courses: Course[] = [
+const coursesDummy: Course[] = [
   {
     id: 1,
     name: "Belajar Vue.js 3 dari Dasar",
@@ -77,7 +93,7 @@ const courses: Course[] = [
     <!-- TODO: conditional rendering based on state -->
     <CourseListData
       v-model:page="currentPage"
-      :courses="courses"
+      :courses="coursesDummy"
       :items-per-page="itemsPerPage"
       :total-items="totalItems"
     />
