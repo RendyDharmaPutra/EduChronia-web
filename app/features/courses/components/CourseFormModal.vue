@@ -49,7 +49,7 @@ const handleSubmit = async (event: FormSubmitEvent<CourseSchemaType>) => {
   // - close modal
   emit("update:open", false);
   // - refresh courses list
-  await refreshNuxtData("courses");
+  await refreshNuxtData("course-list");
 
   // Change submitting state to false */
   isSubmitting.value = false;
