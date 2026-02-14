@@ -2,8 +2,6 @@
 import CourseCard from "./CourseCard.vue";
 import type { Course } from "../course.type";
 
-// TODO: Update CourseSchemaType to include id after updating backend
-
 const { courses, page, itemsPerPage, totalItems } = defineProps<{
   courses: Course[];
   page: number;
@@ -29,10 +27,7 @@ const modelPage = computed({
         :key="course.id"
         :id="course.id"
         :name="course.name"
-        :description="
-          course.description ??
-          'Belum ada deskripsi yang tersedia untuk kursus ini.'
-        "
+        :description="course.description"
       />
     </UPageGrid>
 

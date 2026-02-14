@@ -1,7 +1,9 @@
 <script lang="ts" setup>
 import type { Course } from "../course.type";
 
-defineProps<Course>();
+const props = defineProps<Course>();
+
+const hasDescription = !!props.description;
 </script>
 
 <template>
@@ -13,8 +15,14 @@ defineProps<Course>();
     }"
   >
     <h6 class="font-bold text-lg md:text-xl">{{ name }}</h6>
-    <p class="text-sm leading-relaxed line-clamp-3 text-muted">
-      {{ description }}
+    <p
+      :class="`text-sm leading-relaxed line-clamp-3 text-muted ${!hasDescription && 'italic'}`"
+    >
+      {{
+        hasDescription
+          ? description
+          : "Belum ada deskripsi yang tersedia untuk kursus ini."
+      }}
     </p>
 
     <template #footer>
