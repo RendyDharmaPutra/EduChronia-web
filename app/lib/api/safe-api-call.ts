@@ -1,9 +1,9 @@
 import { FetchError } from "ofetch";
 import type { ApiFailed, ApiSuccess } from "~/types/api";
 
-export async function safeApiCall<T>(
-  request: () => Promise<ApiSuccess<T> | ApiFailed>,
-): Promise<ApiSuccess<T> | ApiFailed> {
+export async function safeApiCall<T, F = undefined>(
+  request: () => Promise<ApiSuccess<T, F> | ApiFailed>,
+): Promise<ApiSuccess<T, F> | ApiFailed> {
   try {
     return await request();
   } catch (error) {

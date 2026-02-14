@@ -8,13 +8,13 @@ import type { ApiFailed, ApiSuccess } from "~/types/api";
  * @param {NitroFetchOptions<any>} [options={}] - The options for the fetch request.
  * @return {Promise<ApiFailed | ApiSuccess<T>>} - A promise that resolves to the API response.
  */
-export async function apiFetch<T>(
+export async function apiFetch<T, F = undefined>(
   url: string,
   options: NitroFetchOptions<any> = {},
-): Promise<ApiFailed | ApiSuccess<T>> {
+): Promise<ApiFailed | ApiSuccess<T, F>> {
   const config = useRuntimeConfig();
 
-  return await $fetch<ApiFailed | ApiSuccess<T>>(url, {
+  return await $fetch<ApiFailed | ApiSuccess<T, F>>(url, {
     baseURL: config.public.hostApiBaseUrl,
     credentials: "include",
     headers: {
