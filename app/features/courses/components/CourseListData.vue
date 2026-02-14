@@ -7,24 +7,42 @@ interface CourseWithId extends CourseSchemaType {
   id: number;
 }
 
-defineProps<{
+const { courses, page, itemsPerPage, totalItems } = defineProps<{
   courses: CourseWithId[];
+  page: number;
+  itemsPerPage: number;
+  totalItems: number;
 }>();
+
+const emit = defineEmits<{
+  (e: "update:page", value: number): void;
+}>();
+
+const modelPage = computed({
+  get: () => page,
+  set: (value) => emit("update:page", value),
+});
 </script>
 
 <template>
-  <UPageGrid class="-mt-20">
-    <CourseCard
-      v-for="course in courses"
-      :key="course.id"
-      :id="course.id"
-      :name="course.name"
-      :description="
-        course.description ??
-        'Belum ada deskripsi yang tersedia untuk kursus ini.'
-      "
-    />
-  </UPageGrid>
-</template>
+  <section class="-mt-20 flex flex-col items-center space-y-12">
+    <UPageGrid class="w-full">
+      <CourseCard
+        v-for="course in courses"
+        :key="course.id"
+        :id="course.id"
+        :name="course.name"
+        :description="
+          course.description ??
+          'Belum ada deskripsi yang tersedia untuk kursus ini.'
+        "
+      />
+    </UPageGrid>
 
-<style></style>
+    <UPagination
+      v-model:page="modelPage"
+      :items-per-page="itemsPerPage"
+      :total="totalItems"
+    />
+  </section>
+</template>

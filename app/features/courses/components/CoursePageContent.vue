@@ -6,8 +6,50 @@ import CourseListData from "./CourseListData.vue";
 
 defineEmits<{ (e: "empty-action"): void }>();
 
+const currentPage = ref(1);
+
+// TODO: Change based on API response
+const itemsPerPage = 10;
+const totalItems = 100;
+
 // Dummy data
 const courses = [
+  {
+    id: 1,
+    name: "Belajar Vue.js 3 dari Dasar",
+    description:
+      "Pelajari konsep dasar Vue.js 3, Composition API, dan cara membangun aplikasi web modern yang reaktif dan efisien mulai dari nol.",
+  },
+  {
+    id: 2,
+    name: "Mastering Nuxt 3",
+    description:
+      "Bangun aplikasi web performa tinggi dengan Nuxt 3, mulai dari routing, state management, hingga deployment.",
+  },
+  {
+    id: 3,
+    name: "Tailwind CSS untuk Pemula",
+    description:
+      "Desain antarmuka web yang cantik dan responsif dengan cepat menggunakan utility-first CSS framework Tailwind CSS.",
+  },
+  {
+    id: 1,
+    name: "Belajar Vue.js 3 dari Dasar",
+    description:
+      "Pelajari konsep dasar Vue.js 3, Composition API, dan cara membangun aplikasi web modern yang reaktif dan efisien mulai dari nol.",
+  },
+  {
+    id: 2,
+    name: "Mastering Nuxt 3",
+    description:
+      "Bangun aplikasi web performa tinggi dengan Nuxt 3, mulai dari routing, state management, hingga deployment.",
+  },
+  {
+    id: 3,
+    name: "Tailwind CSS untuk Pemula",
+    description:
+      "Desain antarmuka web yang cantik dan responsif dengan cepat menggunakan utility-first CSS framework Tailwind CSS.",
+  },
   {
     id: 1,
     name: "Belajar Vue.js 3 dari Dasar",
@@ -32,7 +74,12 @@ const courses = [
 <template>
   <section class="py-20 flex flex-col items-center justify-center w-full">
     <!-- TODO: conditional rendering based on state -->
-    <CourseListData :courses="courses" />
+    <CourseListData
+      v-model:page="currentPage"
+      :courses="courses"
+      :items-per-page="itemsPerPage"
+      :total-items="totalItems"
+    />
 
     <!-- <LoadingState /> -->
 
