@@ -22,7 +22,7 @@ const modelPage = computed({
 </script>
 
 <template>
-  <section class="-mt-20 flex flex-col items-center space-y-12">
+  <section class="-mt-20 flex flex-col items-center space-y-12 w-full">
     <UPageGrid class="w-full">
       <CourseCard
         v-for="course in courses"
