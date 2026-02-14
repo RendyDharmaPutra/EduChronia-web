@@ -4,6 +4,7 @@ import type { CourseSchemaType } from "../course.schema";
 import { courseSchema } from "../course.schema";
 import { useAppToast } from "~/composables/useAppToast";
 import type { ApiFailed, ApiSuccess } from "~/types/api";
+import type { Course } from "../course.type";
 
 const props = defineProps<{
   title: "Tambah Kursus" | "Ubah Kursus";
@@ -11,7 +12,7 @@ const props = defineProps<{
   state: Partial<CourseSchemaType>;
   onSubmit: (
     payload: CourseSchemaType,
-  ) => Promise<ApiSuccess<CourseSchemaType> | ApiFailed>;
+  ) => Promise<ApiSuccess<Course> | ApiFailed>;
 }>();
 
 const emit = defineEmits<{

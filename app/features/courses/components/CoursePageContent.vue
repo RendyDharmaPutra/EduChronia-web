@@ -3,6 +3,7 @@ import EmptyState from "~/components/states/EmptyState.vue";
 import ErrorState from "~/components/states/ErrorState.vue";
 import LoadingState from "~/components/states/LoadingState.vue";
 import CourseListData from "./CourseListData.vue";
+import type { Course } from "../course.type";
 
 defineEmits<{ (e: "empty-action"): void }>();
 
@@ -13,7 +14,7 @@ const itemsPerPage = 10;
 const totalItems = 100;
 
 // Dummy data
-const courses = [
+const courses: Course[] = [
   {
     id: 1,
     name: "Belajar Vue.js 3 dari Dasar",

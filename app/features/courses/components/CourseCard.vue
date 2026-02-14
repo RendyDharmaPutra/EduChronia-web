@@ -1,9 +1,7 @@
 <script lang="ts" setup>
-defineProps<{
-  id: number;
-  name: string;
-  description: string;
-}>();
+import type { Course } from "../course.type";
+
+defineProps<Course>();
 </script>
 
 <template>

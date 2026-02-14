@@ -1,14 +1,11 @@
 <script lang="ts" setup>
 import CourseCard from "./CourseCard.vue";
-import type { CourseSchemaType } from "../course.schema";
+import type { Course } from "../course.type";
 
 // TODO: Update CourseSchemaType to include id after updating backend
-interface CourseWithId extends CourseSchemaType {
-  id: number;
-}
 
 const { courses, page, itemsPerPage, totalItems } = defineProps<{
-  courses: CourseWithId[];
+  courses: Course[];
   page: number;
   itemsPerPage: number;
   totalItems: number;
