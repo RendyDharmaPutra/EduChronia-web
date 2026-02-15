@@ -13,10 +13,7 @@ export async function safeApiCall<T, F = undefined>(
 
       console.error("API ERROR:", apiError.error);
 
-      return {
-        success: false,
-        error: apiError.error,
-      };
+      return apiError;
     }
 
     // Unexpected error (such as network error)
