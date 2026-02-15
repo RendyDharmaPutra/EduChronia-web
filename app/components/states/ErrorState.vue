@@ -15,7 +15,7 @@ const props = withDefaults(
 );
 
 defineEmits<{
-  (e: "retry"): void;
+  (e: "action"): void;
 }>();
 </script>
 
@@ -33,7 +33,7 @@ defineEmits<{
       variant="outline"
       color="neutral"
       size="xl"
-      @click="$emit('retry')"
+      @click="$emit('action')"
       :ui="{
         label: 'text-sm',
         leadingIcon: 'size-4',

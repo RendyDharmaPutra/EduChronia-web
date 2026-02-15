@@ -34,8 +34,6 @@ console.debug(`Courses: ${JSON.stringify(courses.value)}`);
     <ErrorState
       v-else-if="error || courses?.success === false"
       title="Gagal memuat daftar kursus"
-      description="Terjadi kendala koneksi atau masalah teknis. Silakan coba lagi nanti."
-      action-label="Muat Ulang"
       @action="refresh"
     />
 
