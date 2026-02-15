@@ -11,6 +11,8 @@ export async function safeApiCall<T, F = undefined>(
     if (error instanceof FetchError && error.response?._data) {
       const apiError = error.response._data as ApiFailed;
 
+      console.error("API ERROR:", apiError.error);
+
       return {
         success: false,
         error: apiError.error,

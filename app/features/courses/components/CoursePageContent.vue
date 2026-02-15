@@ -23,8 +23,8 @@ const {
   },
 );
 
-// Debug
-console.debug(`Courses: ${JSON.stringify(courses.value)}`);
+// Debug error
+if (error.value) console.error("ERROR:", error.value);
 </script>
 
 <template>
