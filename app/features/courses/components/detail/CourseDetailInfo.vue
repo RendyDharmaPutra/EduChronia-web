@@ -14,7 +14,7 @@ const hasDescription = !!props.course.description;
       {{ course.name }}
     </h2>
     <p
-      :class="`text-lg text-muted leading-relaxed max-w-4xl ${!hasDescription && 'italic'}`"
+      :class="`text-base md:text-lg text-muted leading-relaxed max-w-4xl ${!hasDescription && 'italic'}`"
     >
       {{
         hasDescription
