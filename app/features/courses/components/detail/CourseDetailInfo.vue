@@ -1,12 +1,21 @@
 <script setup lang="ts">
 import ActionButton from "~/components/ui/ActionButton.vue";
 import type { Course } from "../../course.type";
+import type { CourseSchemaType } from "../../course.schema";
+import CourseFormModal from "../CourseFormModal.vue";
 
 const props = defineProps<{
   course: Course;
 }>();
 
 const hasDescription = !!props.course.description;
+
+const openEditModal = ref(false);
+const { formState, resetFormState } = useFormState<CourseSchemaType>(
+  () => props.course,
+);
+
+// TODO: Implement update course service
 </script>
 
 <template>
@@ -24,6 +33,7 @@ const hasDescription = !!props.course.description;
           label="Edit Kursus"
           color="neutral"
           variant="subtle"
+          @click="openEditModal = true"
         />
         <ActionButton
           icon="i-heroicons-trash"
@@ -43,4 +53,12 @@ const hasDescription = !!props.course.description;
       }}
     </p>
   </section>
+
+  <CourseFormModal
+    v-model:open="openEditModal"
+    :title="'Edit Kursus'"
+    :state="formState"
+    @reset-form="resetFormState"
+    @submit=""
+  />
 </template>

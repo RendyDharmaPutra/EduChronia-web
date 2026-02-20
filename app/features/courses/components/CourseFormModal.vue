@@ -7,7 +7,7 @@ import type { ApiFailed, ApiSuccess } from "~/types/api";
 import type { Course } from "../course.type";
 
 const props = defineProps<{
-  title: "Tambah Kursus" | "Ubah Kursus";
+  title: "Tambah Kursus" | "Edit Kursus";
   open: boolean;
   state: Partial<CourseSchemaType>;
   onSubmit: (
