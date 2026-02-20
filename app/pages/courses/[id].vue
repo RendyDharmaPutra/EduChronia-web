@@ -1,9 +1,23 @@
 <script setup lang="ts">
+import ErrorState from "~/components/states/ErrorState.vue";
+import LoadingState from "~/components/states/LoadingState.vue";
 import CourseDetailInfo from "~/features/courses/components/detail/CourseDetailInfo.vue";
-import type { Course } from "~/features/courses/course.type";
+import { readCourseById } from "~/features/courses/services/read-course-by-id.service";
 
 const route = useRoute();
 const courseId = route.params.id;
+
+const {
+  data: courseData,
+  pending,
+  error,
+  refresh,
+} = await useAsyncData("course-detail", () => readCourseById(Number(courseId)));
+
+// ? Debug
+console.log(courseData.value);
+
+if (error.value) console.error("ERROR:", error.value);
 
 const items = [
   {
@@ -15,13 +29,6 @@ const items = [
     to: `/courses/${route.params.id}`,
   },
 ];
-
-const dummyCourse: Course = {
-  id: Number(courseId),
-  name: "Qui irure fugiat et quis ut.",
-  description:
-    "Occaecat labore enim proident quis commodo. Ullamco non deserunt fugiat enim consequat officia cillum elit deserunt dolore nulla. Cupidatat qui ex sunt consequat veniam ullamco commodo in aute aute ex excepteur. Nostrud nulla nulla exercitation consequat duis esse occaecat nisi aute ex nulla amet ad. Ullamco ut commodo anim pariatur mollit consequat occaecat eu ea.",
-};
 </script>
 
 <template>
@@ -29,7 +36,20 @@ const dummyCourse: Course = {
     <!-- Header -->
     <UBreadcrumb :items="items" />
 
-    <!-- Course Detail Content -->
-    <CourseDetailInfo :course="dummyCourse" />
+    <LoadingState v-if="pending" />
+
+    <ErrorState
+      v-else-if="error || courseData?.success === false"
+      title="Gagal memuat detail kursus"
+      :description="
+        courseData?.success === false
+          ? courseData?.error.message
+          : error?.message
+      "
+      @action="refresh"
+      class="self-center"
+    />
+
+    <CourseDetailInfo v-else :course="courseData!.data" />
   </UContainer>
 </template>
