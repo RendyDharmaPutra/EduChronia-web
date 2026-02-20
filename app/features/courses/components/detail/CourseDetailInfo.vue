@@ -3,6 +3,7 @@ import ActionButton from "~/components/ui/ActionButton.vue";
 import type { Course } from "../../course.type";
 import type { CourseSchemaType } from "../../course.schema";
 import CourseFormModal from "../CourseFormModal.vue";
+import ConfirmDialog from "~/components/overlay/ConfirmDialog.vue";
 
 const props = defineProps<{
   course: Course;
@@ -15,7 +16,10 @@ const { formState, resetFormState } = useFormState<CourseSchemaType>(
   () => props.course,
 );
 
+const openDeleteModal = ref(false);
+
 // TODO: Implement update course service
+// TODO: Implement delete course service
 </script>
 
 <template>
@@ -40,6 +44,7 @@ const { formState, resetFormState } = useFormState<CourseSchemaType>(
           label="Hapus Kursus"
           color="error"
           variant="subtle"
+          @click="openDeleteModal = true"
         />
       </div>
     </div>
@@ -53,6 +58,15 @@ const { formState, resetFormState } = useFormState<CourseSchemaType>(
       }}
     </p>
   </section>
+
+  <ConfirmDialog
+    v-model:open="openDeleteModal"
+    title="Hapus Kursus"
+    description="Apakah Anda yakin ingin menghapus kursus ini?"
+    confirmLabel="Hapus"
+    confirmColor="error"
+    @confirm=""
+  />
 
   <CourseFormModal
     v-model:open="openEditModal"
