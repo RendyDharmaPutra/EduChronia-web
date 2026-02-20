@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ActionButton from "~/components/ui/ActionButton.vue";
 import type { Course } from "../../course.type";
 
 const props = defineProps<{
@@ -18,8 +19,18 @@ const hasDescription = !!props.course.description;
       </h2>
 
       <div class="flex flex-row items-center space-x-2">
-        <UButton icon="i-heroicons-pencil" variant="subtle" color="neutral" />
-        <UButton icon="i-heroicons-trash" variant="subtle" color="error" />
+        <ActionButton
+          icon="i-heroicons-pencil"
+          label="Edit Kursus"
+          color="neutral"
+          variant="subtle"
+        />
+        <ActionButton
+          icon="i-heroicons-trash"
+          label="Hapus Kursus"
+          color="error"
+          variant="subtle"
+        />
       </div>
     </div>
     <p

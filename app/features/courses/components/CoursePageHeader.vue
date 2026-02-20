@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import ActionButton from "~/components/ui/ActionButton.vue";
+
 defineEmits<{
   (e: "add-course"): void;
 }>();
@@ -15,13 +17,10 @@ defineEmits<{
       </p>
     </div>
 
-    <UButton
+    <ActionButton
+      icon="i-heroicons-plus"
+      label="Tambah Kursus"
       @click="$emit('add-course')"
-      size="xl"
-      class="flex flex-row justify-center gap-2 h-fit font-semibold text-sm"
-    >
-      <UIcon name="i-heroicons-plus" />
-      Tambah Kursus
-    </UButton>
+    />
   </section>
 </template>
