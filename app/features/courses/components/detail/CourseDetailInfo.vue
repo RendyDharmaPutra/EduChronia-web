@@ -4,6 +4,7 @@ import type { Course } from "../../course.type";
 import type { CourseSchemaType } from "../../course.schema";
 import CourseFormModal from "../CourseFormModal.vue";
 import ConfirmDialog from "~/components/overlay/ConfirmDialog.vue";
+import { deleteCourseByIdService } from "../../services/delete-course-by-id.service";
 
 const props = defineProps<{
   course: Course;
@@ -19,7 +20,6 @@ const { formState, resetFormState } = useFormState<CourseSchemaType>(
 const openDeleteModal = ref(false);
 
 // TODO: Implement update course service
-// TODO: Implement delete course service
 </script>
 
 <template>
@@ -65,7 +65,7 @@ const openDeleteModal = ref(false);
     description="Apakah Anda yakin ingin menghapus kursus ini?"
     confirmLabel="Hapus"
     confirmColor="error"
-    @confirm=""
+    :onConfirm="async () => await deleteCourseByIdService(course.id)"
   />
 
   <CourseFormModal
