@@ -5,6 +5,7 @@ import type { CourseSchemaType } from "../../course.schema";
 import CourseFormModal from "../CourseFormModal.vue";
 import ConfirmDialog from "~/components/overlay/ConfirmDialog.vue";
 import { deleteCourseByIdService } from "../../services/delete-course-by-id.service";
+import { updateCourseByIdService } from "../../services/update-course-by-id.service";
 
 const props = defineProps<{
   course: Course;
@@ -73,6 +74,6 @@ const openDeleteModal = ref(false);
     :title="'Edit Kursus'"
     :state="formState"
     @reset-form="resetFormState"
-    @submit=""
+    @submit="(payload) => updateCourseByIdService(course.id, payload)"
   />
 </template>
