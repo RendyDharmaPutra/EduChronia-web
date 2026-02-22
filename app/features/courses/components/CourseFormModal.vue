@@ -10,6 +10,7 @@ const props = defineProps<{
   title: "Tambah Kursus" | "Edit Kursus";
   open: boolean;
   state: Partial<CourseSchemaType>;
+  refreshKeys: string[];
   onSubmit: (
     payload: CourseSchemaType,
   ) => Promise<ApiSuccess<Course> | ApiFailed>;
@@ -50,7 +51,7 @@ const handleSubmit = async (event: FormSubmitEvent<CourseSchemaType>) => {
   emit("update:open", false);
   // - refresh courses list
   // TODO: Refresh course list or course detail, depends on the action
-  await refreshNuxtData("course-list");
+  await refreshNuxtData(props.refreshKeys);
 
   // Change submitting state to false */
   isSubmitting.value = false;

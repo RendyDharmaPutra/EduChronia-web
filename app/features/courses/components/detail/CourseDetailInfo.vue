@@ -19,8 +19,6 @@ const { formState, resetFormState } = useFormState<CourseSchemaType>(
 );
 
 const openDeleteModal = ref(false);
-
-// TODO: Implement update course service
 </script>
 
 <template>
@@ -73,6 +71,7 @@ const openDeleteModal = ref(false);
     v-model:open="openEditModal"
     :title="'Edit Kursus'"
     :state="formState"
+    :refresh-keys="['course-list', 'course-detail']"
     @reset-form="resetFormState"
     @submit="(payload) => updateCourseByIdService(course.id, payload)"
   />

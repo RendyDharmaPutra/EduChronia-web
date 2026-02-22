@@ -31,6 +31,7 @@ const { formState, resetFormState } = useFormState<CourseSchemaType>(() => ({
       v-model:open="open"
       :title="'Tambah Kursus'"
       :state="formState"
+      :refresh-keys="['course-list']"
       @reset-form="resetFormState"
       @submit="createCourseService"
     />
