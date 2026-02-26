@@ -10,7 +10,7 @@ const props = defineProps<{
   title: "Tambah Kursus" | "Edit Kursus";
   open: boolean;
   state: Partial<CourseSchemaType>;
-  refreshKeys: string[];
+  refreshKeys: string[]; // Keys for refreshNuxtData
   onSubmit: (
     payload: CourseSchemaType,
   ) => Promise<ApiSuccess<Course> | ApiFailed>;
@@ -29,10 +29,6 @@ const handleSubmit = async (event: FormSubmitEvent<CourseSchemaType>) => {
 
   isSubmitting.value = true;
 
-  // Trace & debug
-  console.trace("EVENT SUBMIT");
-  console.debug(event.data);
-
   const result = await props.onSubmit(event.data);
 
   if (!result.success) {
@@ -42,18 +38,11 @@ const handleSubmit = async (event: FormSubmitEvent<CourseSchemaType>) => {
     return;
   }
 
-  // IF success:
-  // - show success toast
   toast.success("Berhasil menyimpan kursus");
-  // - clear form input
   emit("reset-form");
-  // - close modal
   emit("update:open", false);
-  // - refresh courses list
-  // TODO: Refresh course list or course detail, depends on the action
   await refreshNuxtData(props.refreshKeys);
 
-  // Change submitting state to false */
   isSubmitting.value = false;
 };
 </script>
