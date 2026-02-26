@@ -2,8 +2,8 @@
 import CourseFormModal from "~/features/courses/components/CourseFormModal.vue";
 import { createCourseService } from "~/features/courses/services/create-course.service";
 import { useCourseFormModal } from "~/features/courses/composables/useCourseFormModal";
-import CoursePageHeader from "~/features/courses/components/CoursePageHeader.vue";
-import CoursePageContent from "~/features/courses/components/CoursePageContent.vue";
+import CourseListHeader from "~/features/courses/components/list/CourseListHeader.vue";
+import CourseListContent from "~/features/courses/components/list/CourseListContent.vue";
 
 definePageMeta({
   middleware: "auth",
@@ -18,9 +18,9 @@ const { openModal, formState, resetFormState } = useCourseFormModal();
 
 <template>
   <UContainer class="flex flex-col items-center">
-    <CoursePageHeader @open-modal="openModal = true" />
+    <CourseListHeader @open-modal="openModal = true" />
 
-    <CoursePageContent @open-modal="openModal = true" />
+    <CourseListContent @open-modal="openModal = true" />
 
     <CourseFormModal
       v-model:open="openModal"

@@ -2,8 +2,8 @@
 import EmptyState from "~/components/states/EmptyState.vue";
 import ErrorState from "~/components/states/ErrorState.vue";
 import LoadingState from "~/components/states/LoadingState.vue";
+import { readCourseListService } from "../../services/read-course-list.service";
 import CourseListData from "./CourseListData.vue";
-import { readCourseListService } from "../services/read-course-list.service";
 
 defineEmits<{ (e: "open-modal"): void }>();
 

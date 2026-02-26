@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import CourseCard from "./CourseCard.vue";
-import type { Course } from "../course.type";
+import type { Course } from "../../course.type";
+import CourseCard from "../CourseCard.vue";
 
 const { courses, page, itemsPerPage, totalItems } = defineProps<{
   courses: Course[];
