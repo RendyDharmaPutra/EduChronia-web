@@ -14,12 +14,9 @@ const {
   refresh,
 } = await useAsyncData("course-detail", () => readCourseById(Number(courseId)));
 
-// ? Debug
-console.log(courseData.value);
-
 if (error.value) console.error("ERROR:", error.value);
 
-const items = [
+const breadcrumbItems = [
   {
     label: "Kursus",
     to: "/courses",
@@ -33,8 +30,7 @@ const items = [
 
 <template>
   <UContainer class="py-8 flex flex-col space-y-8 w-full h-screen">
-    <!-- Header -->
-    <UBreadcrumb :items="items" />
+    <UBreadcrumb :items="breadcrumbItems" />
 
     <LoadingState v-if="pending" />
 

@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import ActionButton from "~/components/ui/ActionButton.vue";
 import type { Course } from "../../course.type";
-import type { CourseSchemaType } from "../../course.schema";
 import CourseFormModal from "../CourseFormModal.vue";
 import ConfirmDialog from "~/components/overlay/ConfirmDialog.vue";
 import { deleteCourseByIdService } from "../../services/delete-course-by-id.service";
 import { updateCourseByIdService } from "../../services/update-course-by-id.service";
+import { useCourseFormModal } from "../../composables/useCourseFormModal";
 
 const props = defineProps<{
   course: Course;
@@ -13,10 +13,11 @@ const props = defineProps<{
 
 const hasDescription = !!props.course.description;
 
-const openEditModal = ref(false);
-const { formState, resetFormState } = useFormState<CourseSchemaType>(
-  () => props.course,
-);
+const {
+  openModal: openEditModal,
+  formState,
+  resetFormState,
+} = useCourseFormModal(props.course);
 
 const openDeleteModal = ref(false);
 </script>
