@@ -2,7 +2,7 @@
 import ActionButton from "~/components/ui/ActionButton.vue";
 
 defineEmits<{
-  (e: "add-course"): void;
+  (e: "open-modal"): void;
 }>();
 </script>
 
@@ -20,7 +20,7 @@ defineEmits<{
     <ActionButton
       icon="i-heroicons-plus"
       label="Tambah Kursus"
-      @click="$emit('add-course')"
+      @click="$emit('open-modal')"
     />
   </section>
 </template>

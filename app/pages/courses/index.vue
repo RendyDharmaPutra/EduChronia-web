@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import CourseFormModal from "~/features/courses/components/CourseFormModal.vue";
-import type { CourseSchemaType } from "~/features/courses/course.schema";
 import { createCourseService } from "~/features/courses/services/create-course.service";
-import { useFormState } from "~/composables/useFormState";
+import { useCourseFormModal } from "~/features/courses/composables/useCourseFormModal";
 import CoursePageHeader from "~/features/courses/components/CoursePageHeader.vue";
 import CoursePageContent from "~/features/courses/components/CoursePageContent.vue";
 
@@ -14,18 +13,14 @@ usePageMeta({
   title: "Kursus",
 });
 
-const open = ref(false);
-const { formState, resetFormState } = useFormState<CourseSchemaType>(() => ({
-  name: "",
-  description: "",
-}));
+const { open, formState, resetFormState } = useCourseFormModal();
 </script>
 
 <template>
   <UContainer class="flex flex-col items-center">
-    <CoursePageHeader @add-course="open = true" />
+    <CoursePageHeader @open-modal="open = true" />
 
-    <CoursePageContent @empty-action="open = true" />
+    <CoursePageContent @open-modal="open = true" />
 
     <CourseFormModal
       v-model:open="open"
