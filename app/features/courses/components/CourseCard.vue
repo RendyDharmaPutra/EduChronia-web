@@ -10,7 +10,8 @@ const hasDescription = !!props.description;
   <UCard
     variant="subtle"
     :ui="{
-      body: 'flex flex-col space-y-3',
+      root: 'flex flex-col h-full',
+      body: 'flex flex-col space-y-3 flex-grow',
       footer: 'flex flex-row justify-end',
     }"
   >
