@@ -1,0 +1,79 @@
+<script setup lang="ts">
+import ActionButton from "~/components/ui/ActionButton.vue";
+import type { Course } from "../../course.type";
+import CourseFormModal from "../CourseFormModal.vue";
+import ConfirmDialog from "~/components/overlay/ConfirmDialog.vue";
+import { deleteCourseByIdService } from "../../services/delete-course-by-id.service";
+import { updateCourseByIdService } from "../../services/update-course-by-id.service";
+import { useCourseFormModal } from "../../composables/useCourseFormModal";
+
+const props = defineProps<{
+  course: Course;
+}>();
+
+const hasDescription = !!props.course.description;
+
+const {
+  openModal: openEditModal,
+  formState,
+  resetFormState,
+} = useCourseFormModal(props.course);
+
+const openDeleteModal = ref(false);
+</script>
+
+<template>
+  <section class="flex flex-col space-y-4 w-full">
+    <div
+      class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:justify-between w-full h-fit"
+    >
+      <h2 class="font-extrabold text-4xl lg:text-5xl text-highlighted">
+        {{ course.name }}
+      </h2>
+
+      <div class="flex flex-row items-center space-x-2">
+        <ActionButton
+          icon="i-heroicons-pencil"
+          label="Edit Kursus"
+          color="neutral"
+          variant="subtle"
+          @click="openEditModal = true"
+        />
+        <ActionButton
+          icon="i-heroicons-trash"
+          label="Hapus Kursus"
+          color="error"
+          variant="subtle"
+          @click="openDeleteModal = true"
+        />
+      </div>
+    </div>
+    <p
+      :class="`text-base md:text-lg text-muted leading-relaxed max-w-4xl ${!hasDescription && 'italic'}`"
+    >
+      {{
+        hasDescription
+          ? course.description
+          : "Belum ada deskripsi yang tersedia untuk kursus ini."
+      }}
+    </p>
+  </section>
+
+  <ConfirmDialog
+    v-model:open="openDeleteModal"
+    title="Hapus Kursus"
+    description="Apakah Anda yakin ingin menghapus kursus ini?"
+    confirmLabel="Hapus"
+    confirmColor="error"
+    :onConfirm="async () => await deleteCourseByIdService(course.id)"
+  />
+
+  <CourseFormModal
+    v-model:open="openEditModal"
+    :title="'Edit Kursus'"
+    :state="formState"
+    :refresh-keys="['course-list', 'course-detail']"
+    @reset-form="resetFormState"
+    @submit="(payload) => updateCourseByIdService(course.id, payload)"
+  />
+</template>

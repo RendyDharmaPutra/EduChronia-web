@@ -5,7 +5,7 @@ import { usePageMeta } from "../composables/usePageMeta";
 
 definePageMeta({
   middleware: "guest",
-  layout: "main",
+  layout: "auth",
 });
 
 usePageMeta({

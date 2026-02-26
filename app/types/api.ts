@@ -14,7 +14,7 @@ export type ApiResponse = {
  * @template T - The type of data returned by the API.
  * @template F - The type of additional meta data returned by the API (optional).
  */
-export type ApiSuccess<T, F = unknown> = ApiResponse & {
+export type ApiSuccess<T, F = undefined> = ApiResponse & {
   /**
    * Indicates that the request was successful.
    */
@@ -28,7 +28,7 @@ export type ApiSuccess<T, F = unknown> = ApiResponse & {
   /**
    * Additional metadata returned by the API (optional).
    */
-  meta?: F;
+  meta: F;
 };
 
 /**
