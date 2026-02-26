@@ -10,7 +10,7 @@ defineEmits<{ (e: "open-modal"): void }>();
 const currentPage = ref(1);
 
 const {
-  data: courses,
+  data: coursesData,
   pending,
   error,
   refresh,
@@ -30,13 +30,13 @@ if (error.value) console.error("ERROR:", error.value);
     <LoadingState v-if="pending" />
 
     <ErrorState
-      v-else-if="error || courses?.success === false"
+      v-else-if="error || coursesData?.success === false"
       title="Gagal memuat daftar kursus"
       @action="refresh"
     />
 
     <EmptyState
-      v-else-if="courses!.data.length === 0"
+      v-else-if="coursesData!.data.length === 0"
       icon="i-heroicons-book-open"
       title="Belum ada kursus"
       description="Mulai perjalanan belajar Anda dengan membuat kursus pertama."
@@ -47,9 +47,9 @@ if (error.value) console.error("ERROR:", error.value);
     <CourseListData
       v-else
       v-model:page="currentPage"
-      :courses="courses!.data"
-      :items-per-page="courses!.meta.pagination.limit"
-      :total-items="courses!.meta.pagination.total"
+      :courses="coursesData!.data"
+      :items-per-page="coursesData!.meta.pagination.limit"
+      :total-items="coursesData!.meta.pagination.total"
     />
   </section>
 </template>
