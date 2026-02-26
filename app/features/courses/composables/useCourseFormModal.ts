@@ -8,13 +8,13 @@ const DEFAULT_INITIAL_STATE: CourseSchemaType = {
 export function useCourseFormModal(
   initialState: CourseSchemaType = DEFAULT_INITIAL_STATE,
 ) {
-  const open = ref(false);
+  const openModal = ref(false);
   const { formState, resetFormState } = useFormState<CourseSchemaType>(
     () => initialState,
   );
 
   return {
-    open,
+    openModal,
     formState,
     resetFormState,
   };

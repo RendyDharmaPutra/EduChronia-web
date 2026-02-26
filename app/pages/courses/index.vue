@@ -13,17 +13,17 @@ usePageMeta({
   title: "Kursus",
 });
 
-const { open, formState, resetFormState } = useCourseFormModal();
+const { openModal, formState, resetFormState } = useCourseFormModal();
 </script>
 
 <template>
   <UContainer class="flex flex-col items-center">
-    <CoursePageHeader @open-modal="open = true" />
+    <CoursePageHeader @open-modal="openModal = true" />
 
-    <CoursePageContent @open-modal="open = true" />
+    <CoursePageContent @open-modal="openModal = true" />
 
     <CourseFormModal
-      v-model:open="open"
+      v-model:open="openModal"
       :title="'Tambah Kursus'"
       :state="formState"
       :refresh-keys="['course-list']"
