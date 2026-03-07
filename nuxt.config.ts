@@ -38,6 +38,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
+      appUrl: process.env.NUXT_PUBLIC_APP_URL,
       hostApiBaseUrl: process.env.NUXT_PUBLIC_HOST_API_BASE_URL,
     },
   },
