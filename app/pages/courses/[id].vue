@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import ErrorState from "~/components/states/ErrorState.vue";
 import LoadingState from "~/components/states/LoadingState.vue";
-import CourseDetailInfo from "~/features/courses/components/detail/CourseDetailInfo.vue";
+import CourseDetailContent from "~/features/courses/components/detail/CourseDetailContent.vue";
 import { readCourseById } from "~/features/courses/services/read-course-by-id.service";
 
 const route = useRoute();
 const courseId = route.params.id;
 
 const {
-  data: courseData,
+  data: courseResponse,
   pending,
   error,
   refresh,
@@ -35,17 +35,17 @@ const breadcrumbItems = [
     <LoadingState v-if="pending" />
 
     <ErrorState
-      v-else-if="error || courseData?.success === false"
+      v-else-if="error || courseResponse?.success === false"
       title="Gagal memuat detail kursus"
       :description="
-        courseData?.success === false
-          ? courseData?.error.message
+        courseResponse?.success === false
+          ? courseResponse?.error.message
           : error?.message
       "
       @action="refresh"
       class="self-center"
     />
 
-    <CourseDetailInfo v-else :course="courseData!.data.course" />
+    <CourseDetailContent v-else :courseData="courseResponse!.data" />
   </UContainer>
 </template>
