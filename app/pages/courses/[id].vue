@@ -46,6 +46,6 @@ const breadcrumbItems = [
       class="self-center"
     />
 
-    <CourseDetailInfo v-else :course="courseData!.data" />
+    <CourseDetailInfo v-else :course="courseData!.data.course" />
   </UContainer>
 </template>
