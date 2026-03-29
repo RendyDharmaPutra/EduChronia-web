@@ -34,7 +34,7 @@ defineProps<{
 	          </span>
 	          <UButton
 	            icon="i-lucide-more-vertical"
-	            color="primary"
+	            color="neutral"
 	            variant="ghost"
 	            size="md"
 	            @click="console.trace('More menu')"
