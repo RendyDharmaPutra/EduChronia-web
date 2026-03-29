@@ -1,19 +1,17 @@
 <script setup lang="ts">
-import ActionButton from '~/components/ui/ActionButton.vue';
-import type { Task } from '~/features/tasks/task.type';
-import CourseDetailTaskList from './task/CourseDetailTaskList.vue';
-
+import ActionButton from "~/components/ui/ActionButton.vue";
+import type { Task } from "~/features/tasks/task.type";
+import CourseDetailTaskList from "./task/CourseDetailTaskList.vue";
 
 const props = defineProps<{
   tasks: Task[];
 }>();
-
 </script>
 
 <template>
   <section class="flex flex-col space-y-6 w-full h-full">
     <!-- Header -->
-     <div class="mb-6 flex flex-row items-center justify-between">
+    <div class="mb-6 flex flex-row items-center justify-between">
       <div class="flex flex-row items-center gap-3">
         <UIcon name="i-lucide-notepad-text" class="text-primary text-2xl" />
         <h3 class="font-bold text-2xl text-highlighted">
@@ -28,18 +26,12 @@ const props = defineProps<{
         variant="solid"
         @click="console.debug('Tambah Tugas Baru')"
       />
-     </div>
+    </div>
 
-     <!-- Main Content -->
-      <!-- Task List -->
-      <CourseDetailTaskList :tasks="tasks" />
+    <!-- Main Content -->
+    <!-- Task List -->
+    <CourseDetailTaskList :tasks="tasks" />
 
-     <!-- Task Resume -->
-
-
+    <!-- Task Resume -->
   </section>
-
-
-
 </template>
-
