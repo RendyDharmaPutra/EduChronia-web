@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import ActionButton from '~/components/ui/ActionButton.vue';
 import type { Task } from '~/features/tasks/task.type';
+import CourseDetailTaskList from './task/CourseDetailTaskList.vue';
 
 
 const props = defineProps<{
@@ -31,7 +32,7 @@ const props = defineProps<{
 
      <!-- Main Content -->
       <!-- Task List -->
-
+      <CourseDetailTaskList :tasks="tasks" />
 
      <!-- Task Resume -->
 
