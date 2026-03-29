@@ -8,10 +8,6 @@ const props = defineProps<{
 </script>
 
 <template>
-  <!-- ! Problems:
-  1. What if there are no tasks?
-  2. What if there are many tasks?
-  -->
   <div class="pr-2 flex flex-col space-y-4 w-full max-h-106 overflow-y-auto">
     <!-- Task Card  -->
     <CourseDetailTaskCard v-for="task in tasks" :key="task.id" :task="task" />
