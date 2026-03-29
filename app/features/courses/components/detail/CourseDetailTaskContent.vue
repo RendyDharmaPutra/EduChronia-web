@@ -12,9 +12,9 @@ const props = defineProps<{
   <section class="flex flex-col space-y-6 w-full h-full">
     <!-- Header -->
     <div class="mb-6 flex flex-row items-center justify-between">
-      <div class="flex flex-row items-center gap-3">
-        <UIcon name="i-lucide-notepad-text" class="text-primary text-2xl" />
-        <h3 class="font-bold text-2xl text-highlighted">
+      <div class="flex flex-row items-center gap-1.5 md:gap-3">
+        <UIcon name="i-lucide-clipboard-list" class="text-primary text-2xl" />
+        <h3 class="font-bold text-xl md:text-2xl text-highlighted">
           Daftar Tugas Terkait
         </h3>
       </div>
