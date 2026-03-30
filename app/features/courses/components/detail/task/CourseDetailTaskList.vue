@@ -8,7 +8,8 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="pr-2 flex flex-col space-y-4 w-full max-h-106 overflow-y-auto">
+  <!-- TODO: Make the height smaller to place Task Resume on parent component -->
+  <div class="pr-2 flex flex-col space-y-4 w-full max-h-136 overflow-y-auto">
     <!-- Task Card  -->
     <CourseDetailTaskCard v-for="task in tasks" :key="task.id" :task="task" />
   </div>

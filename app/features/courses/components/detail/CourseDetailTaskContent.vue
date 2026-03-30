@@ -32,6 +32,6 @@ const props = defineProps<{
     <!-- Task List -->
     <CourseDetailTaskList :tasks="tasks" />
 
-    <!-- Task Resume -->
+    <!-- TODO: Task Resume -->
   </section>
 </template>
