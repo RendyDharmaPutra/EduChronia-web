@@ -11,7 +11,9 @@ const props = defineProps<{
 <template>
   <section class="flex flex-col space-y-6 w-full h-full">
     <!-- Header -->
-    <div class="mb-6 flex flex-row items-center justify-between">
+    <div
+      class="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
+    >
       <div class="flex flex-row items-center gap-1.5 md:gap-3">
         <UIcon name="i-lucide-clipboard-list" class="text-primary text-2xl" />
         <h3 class="font-bold text-xl md:text-2xl text-highlighted">
