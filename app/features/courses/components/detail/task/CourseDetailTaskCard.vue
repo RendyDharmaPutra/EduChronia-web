@@ -41,23 +41,13 @@ const taskStatus = getTaskStatus(props.task);
       </div>
     </div>
 
-    <div
-      class="flex self-end sm:self-auto items-center gap-2.5 md:gap-4 shrink-0"
-    >
+    <div class="flex self-end sm:self-auto items-center shrink-0">
       <span
         v-if="taskStatus.text"
         :class="`px-3 py-1 rounded-full bg-${taskStatus.color}/10 text-${taskStatus.color} text-xs font-bold border border-${taskStatus.color}/30`"
       >
         {{ taskStatus.text }}
       </span>
-      <UButton
-        icon="i-lucide-more-vertical"
-        color="neutral"
-        variant="ghost"
-        size="md"
-        @click="console.trace('More menu')"
-      />
-      <!-- TODO: Add menu -->
     </div>
   </div>
 </template>
