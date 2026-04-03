@@ -79,7 +79,7 @@ const colors =
           <span class="flex items-center gap-1.5 min-w-0">
             <UIcon name="i-lucide-calendar" class="shrink-0" />
             <span class="truncate"
-              >Deadline: {{ formatDateDDMMYYYY(task.deadline) }}</span
+              >Deadline: {{ formatDateDDMMYYYYHHMM(task.deadline) }}</span
             >
           </span>
         </div>
