@@ -13,13 +13,14 @@ const props = defineProps<{
   <section class="flex flex-col space-y-12 w-full h-full">
     <CourseDetailInfo :course="courseData.course" />
 
+    <!-- TODO: Add Handler to open add task modal -->
     <EmptyState
       v-if="courseData.tasks.length === 0"
       icon="i-lucide-clipboard-list"
       title="Belum ada tugas"
       description="Mulai perjalanan belajar Anda dengan membuat tugas pertama."
       action-label="Buat Tugas"
-      @action="$emit('open-modal')"
+      @action="console.debug('Tambah Tugas Baru')"
       class="self-center"
     />
 
