@@ -15,6 +15,13 @@ const colorMap = {
     text: "text-success",
     badgeBorder: "border-success/30",
   },
+  neutral: {
+    borderHover: "hover:border-neutral/50",
+    bgLight: "bg-neutral/10",
+    bgHover: "group-hover:bg-neutral",
+    text: "text-neutral",
+    badgeBorder: "border-neutral/30",
+  },
   error: {
     borderHover: "hover:border-error/50",
     bgLight: "bg-error/10",
