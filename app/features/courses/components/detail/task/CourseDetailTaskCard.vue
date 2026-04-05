@@ -43,12 +43,13 @@ const colors =
 </script>
 
 <template>
+  <!-- TODO: Add Handler to open task modal -->
   <div
     :class="[
       'group p-3.5 md:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-0 bg-white dark:bg-default/20 border border-muted/35 rounded-xl duration-300 cursor-pointer',
       colors.borderHover,
     ]"
-    @click="console.log('Button clicked')" <!-- TODO: Add Handler to open task modal -->
+    @click="console.log('Button clicked')"
   >
     <div
       class="flex items-start sm:items-center gap-3.5 md:gap-5 w-full sm:w-auto min-w-0"
