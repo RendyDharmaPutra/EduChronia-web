@@ -4,7 +4,7 @@ export const taskSchema = z.object({
   title: z
     .string("Judul tidak boleh kosong")
     .min(3, "Judul minimal 3 karakter")
-    .max(100, "Judul maksimal 100 karakter")
+    .max(150, "Judul maksimal 150 karakter")
     .nonoptional(),
   description: z
     .string("Deskripsi harus berupa karakter")
