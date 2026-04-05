@@ -73,6 +73,14 @@ const handleSubmit = async (event: FormSubmitEvent<TaskSchemaType>) => {
         <UFormField label="Deskripsi" name="description" size="lg">
           <UTextarea v-model="state.description" :rows="6" class="w-full" />
         </UFormField>
+
+        <UFormField label="Tenggat Waktu" name="deadline" size="lg">
+          <UInput
+            type="datetime-local"
+            v-model="state.deadline"
+            class="w-full"
+          />
+        </UFormField>
       </UForm>
     </template>
 
