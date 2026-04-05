@@ -7,6 +7,10 @@ import CourseDetailTaskContent from "./CourseDetailTaskContent.vue";
 const props = defineProps<{
   courseData: ReadCourseByIdResponse;
 }>();
+
+const emit = defineEmits<{
+  (event: "open-modal"): void;
+}>();
 </script>
 
 <template>
@@ -20,10 +24,14 @@ const props = defineProps<{
       title="Belum ada tugas"
       description="Mulai perjalanan belajar Anda dengan membuat tugas pertama."
       action-label="Buat Tugas"
-      @action="console.debug('Tambah Tugas Baru')"
+      @action="emit('open-modal')"
       class="self-center"
     />
 
-    <CourseDetailTaskContent v-else :tasks="courseData.tasks" />
+    <CourseDetailTaskContent
+      @open-modal="emit('open-modal')"
+      v-else
+      :tasks="courseData.tasks"
+    />
   </section>
 </template>

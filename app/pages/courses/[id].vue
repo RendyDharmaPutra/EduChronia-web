@@ -3,6 +3,8 @@ import ErrorState from "~/components/states/ErrorState.vue";
 import LoadingState from "~/components/states/LoadingState.vue";
 import CourseDetailContent from "~/features/courses/components/detail/CourseDetailContent.vue";
 import { readCourseById } from "~/features/courses/services/read-course-by-id.service";
+import TaskFormModal from "~/features/tasks/components/TaskFormModal.vue";
+import { useTaskFormModal } from "~/features/tasks/composables/useTaskFormModal";
 
 const route = useRoute();
 const courseId = route.params.id;
@@ -26,6 +28,8 @@ const breadcrumbItems = [
     to: `/courses/${route.params.id}`,
   },
 ];
+
+const { openModal, formState, resetFormState } = useTaskFormModal();
 </script>
 
 <template>
@@ -46,6 +50,19 @@ const breadcrumbItems = [
       class="self-center"
     />
 
-    <CourseDetailContent v-else :courseData="courseResponse!.data" />
+    <CourseDetailContent
+      @open-modal="openModal = true"
+      v-else
+      :courseData="courseResponse!.data"
+    />
+
+    <TaskFormModal
+      v-model:open="openModal"
+      :title="'Tambah Tugas'"
+      :state="formState"
+      :refresh-keys="['course-detail']"
+      @reset-form="resetFormState"
+      @submit=""
+    />
   </UContainer>
 </template>

@@ -6,6 +6,10 @@ import CourseDetailTaskList from "./task/CourseDetailTaskList.vue";
 const props = defineProps<{
   tasks: Task[];
 }>();
+
+const emit = defineEmits<{
+  (event: "open-modal"): void;
+}>();
 </script>
 
 <template>
@@ -27,7 +31,7 @@ const props = defineProps<{
         label="Tugas Baru"
         color="primary"
         variant="solid"
-        @click="console.debug('Tambah Tugas Baru')"
+        @click="emit('open-modal')"
       />
     </div>
 
