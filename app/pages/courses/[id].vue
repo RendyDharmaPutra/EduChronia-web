@@ -5,16 +5,17 @@ import CourseDetailContent from "~/features/courses/components/detail/CourseDeta
 import { readCourseById } from "~/features/courses/services/read-course-by-id.service";
 import TaskFormModal from "~/features/tasks/components/TaskFormModal.vue";
 import { useTaskFormModal } from "~/features/tasks/composables/useTaskFormModal";
+import { createTaskService } from "~/features/tasks/services/create-task.service";
 
 const route = useRoute();
-const courseId = route.params.id;
+const courseId = Number(route.params.id);
 
 const {
   data: courseResponse,
   pending,
   error,
   refresh,
-} = await useAsyncData("course-detail", () => readCourseById(Number(courseId)));
+} = await useAsyncData("course-detail", () => readCourseById(courseId));
 
 if (error.value) console.error("ERROR:", error.value);
 
@@ -25,7 +26,7 @@ const breadcrumbItems = [
   },
   {
     label: "Detail Kursus",
-    to: `/courses/${route.params.id}`,
+    to: `/courses/${courseId}`,
   },
 ];
 
@@ -62,7 +63,7 @@ const { openModal, formState, resetFormState } = useTaskFormModal();
       :state="formState"
       :refresh-keys="['course-detail']"
       @reset-form="resetFormState"
-      @submit=""
+      @submit="(payload) => createTaskService({ ...payload, courseId })"
     />
   </UContainer>
 </template>
