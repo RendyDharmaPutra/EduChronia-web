@@ -40,6 +40,24 @@ const colorMap = {
 
 const colors =
   colorMap[taskStatus.color as keyof typeof colorMap] || colorMap.primary;
+
+const dropdownItems = [
+  {
+    label: "Edit",
+    icon: "i-lucide-pencil",
+    click: () => {
+      console.trace("Edit");
+    },
+  },
+  {
+    label: "Delete",
+    icon: "i-lucide-trash",
+    color: "error" as const,
+    click: () => {
+      console.trace("Delete");
+    },
+  },
+];
 </script>
 
 <template>
@@ -87,7 +105,9 @@ const colors =
       </div>
     </div>
 
-    <div class="flex self-end sm:self-auto items-center shrink-0">
+    <div
+      class="flex self-end sm:self-auto items-center gap-2 md:gap-3.5 shrink-0"
+    >
       <span
         v-if="taskStatus.text"
         :class="[
@@ -99,6 +119,14 @@ const colors =
       >
         {{ taskStatus.text }}
       </span>
+      <UDropdownMenu :items="dropdownItems">
+        <UButton
+          icon="i-lucide-more-vertical"
+          color="neutral"
+          variant="ghost"
+          size="md"
+        />
+      </UDropdownMenu>
     </div>
   </div>
 </template>
