@@ -6,6 +6,7 @@ import { readCourseById } from "~/features/courses/services/read-course-by-id.se
 import TaskFormModal from "~/features/tasks/components/TaskFormModal.vue";
 import { useTaskFormModal } from "~/features/tasks/composables/useTaskFormModal";
 import { createTaskService } from "~/features/tasks/services/create-task.service";
+import { useSelectedTaskStore } from "~/features/tasks/stores/selectedTask.store";
 
 const route = useRoute();
 const courseId = Number(route.params.id);
@@ -36,11 +37,9 @@ const {
   resetFormState: resetCreateFormState,
 } = useTaskFormModal();
 
-const {
-  openModal: openEditModal,
-  formState: editFormState,
-  resetFormState: resetEditFormState,
-} = useTaskFormModal();
+const openEditModal = ref(false);
+
+const selectedTaskStore = useSelectedTaskStore();
 </script>
 
 <template>
@@ -80,9 +79,9 @@ const {
     <TaskFormModal
       v-model:open="openEditModal"
       :title="'Edit Tugas'"
-      :state="editFormState"
+      :state="selectedTaskStore.selectedTask!"
       :refresh-keys="['course-detail']"
-      @reset-form="resetEditFormState"
+      @reset-form="selectedTaskStore.clearSelectedTask"
       @submit=""
     />
   </UContainer>

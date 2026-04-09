@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useSelectedTaskStore } from "~/features/tasks/stores/selectedTask.store";
 import type { Task } from "~/features/tasks/task.type";
 
 const props = defineProps<{
@@ -8,6 +9,8 @@ const props = defineProps<{
 const emit = defineEmits<{
   (event: "open-edit-modal"): void;
 }>();
+
+const { setSelectedTask } = useSelectedTaskStore();
 
 const taskStatus = getTaskStatus(props.task);
 
@@ -69,6 +72,7 @@ const dropdownItems = [
       'group p-3.5 md:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-0 bg-white dark:bg-default/20 border border-muted/60 dark:border-muted/35 rounded-xl duration-300 cursor-pointer',
       colors.borderHover,
     ]"
+    @click="setSelectedTask(props.task)"
   >
     <div
       class="flex items-start sm:items-center gap-3.5 md:gap-5 w-full sm:w-auto min-w-0"
