@@ -9,7 +9,8 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (event: "open-modal"): void;
+  (event: "open-create-modal"): void;
+  (event: "open-edit-modal"): void;
 }>();
 </script>
 
@@ -24,13 +25,14 @@ const emit = defineEmits<{
       title="Belum ada tugas"
       description="Mulai perjalanan belajar Anda dengan membuat tugas pertama."
       action-label="Buat Tugas"
-      @action="emit('open-modal')"
+      @action="emit('open-create-modal')"
       class="self-center"
     />
 
     <CourseDetailTaskContent
-      @open-modal="emit('open-modal')"
       v-else
+      @open-create-modal="emit('open-create-modal')"
+      @open-edit-modal="emit('open-edit-modal')"
       :tasks="courseData.tasks"
     />
   </section>

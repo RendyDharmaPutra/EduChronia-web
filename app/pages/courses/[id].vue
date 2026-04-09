@@ -30,7 +30,17 @@ const breadcrumbItems = [
   },
 ];
 
-const { openModal, formState, resetFormState } = useTaskFormModal();
+const {
+  openModal: openCreateModal,
+  formState: createFormState,
+  resetFormState: resetCreateFormState,
+} = useTaskFormModal();
+
+const {
+  openModal: openEditModal,
+  formState: editFormState,
+  resetFormState: resetEditFormState,
+} = useTaskFormModal();
 </script>
 
 <template>
@@ -52,18 +62,28 @@ const { openModal, formState, resetFormState } = useTaskFormModal();
     />
 
     <CourseDetailContent
-      @open-modal="openModal = true"
       v-else
+      @open-create-modal="openCreateModal = true"
+      @open-edit-modal="openEditModal = true"
       :courseData="courseResponse!.data"
     />
 
     <TaskFormModal
-      v-model:open="openModal"
+      v-model:open="openCreateModal"
       :title="'Tambah Tugas'"
-      :state="formState"
+      :state="createFormState"
       :refresh-keys="['course-detail']"
-      @reset-form="resetFormState"
+      @reset-form="resetCreateFormState"
       @submit="(payload) => createTaskService({ ...payload, courseId })"
+    />
+
+    <TaskFormModal
+      v-model:open="openEditModal"
+      :title="'Edit Tugas'"
+      :state="editFormState"
+      :refresh-keys="['course-detail']"
+      @reset-form="resetEditFormState"
+      @submit=""
     />
   </UContainer>
 </template>

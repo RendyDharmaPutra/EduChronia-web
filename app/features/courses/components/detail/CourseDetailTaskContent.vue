@@ -8,7 +8,8 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (event: "open-modal"): void;
+  (event: "open-create-modal"): void;
+  (event: "open-edit-modal"): void;
 }>();
 </script>
 
@@ -31,13 +32,16 @@ const emit = defineEmits<{
         label="Tugas Baru"
         color="primary"
         variant="solid"
-        @click="emit('open-modal')"
+        @click="emit('open-create-modal')"
       />
     </div>
 
     <!-- Main Content -->
     <!-- Task List -->
-    <CourseDetailTaskList :tasks="tasks" />
+    <CourseDetailTaskList
+      @open-edit-modal="emit('open-edit-modal')"
+      :tasks="tasks"
+    />
 
     <!-- TODO: Task Resume -->
   </section>

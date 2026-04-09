@@ -5,6 +5,10 @@ const props = defineProps<{
   task: Task;
 }>();
 
+const emit = defineEmits<{
+  (event: "open-edit-modal"): void;
+}>();
+
 const taskStatus = getTaskStatus(props.task);
 
 const colorMap = {
@@ -45,15 +49,13 @@ const dropdownItems = [
   {
     label: "Edit",
     icon: "i-lucide-pencil",
-    click: () => {
-      console.trace("Edit");
-    },
+    onClick: () => emit("open-edit-modal"),
   },
   {
     label: "Delete",
     icon: "i-lucide-trash",
     color: "error" as const,
-    click: () => {
+    onClick: () => {
       console.trace("Delete");
     },
   },
@@ -67,7 +69,6 @@ const dropdownItems = [
       'group p-3.5 md:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-0 bg-white dark:bg-default/20 border border-muted/60 dark:border-muted/35 rounded-xl duration-300 cursor-pointer',
       colors.borderHover,
     ]"
-    @click="console.log('Button clicked')"
   >
     <div
       class="flex items-start sm:items-center gap-3.5 md:gap-5 w-full sm:w-auto min-w-0"
