@@ -6,6 +6,7 @@ import { readCourseById } from "~/features/courses/services/read-course-by-id.se
 import TaskFormModal from "~/features/tasks/components/TaskFormModal.vue";
 import { useTaskFormModal } from "~/features/tasks/composables/useTaskFormModal";
 import { createTaskService } from "~/features/tasks/services/create-task.service";
+import { updateTaskService } from "~/features/tasks/services/update-task.service";
 import { useSelectedTaskStore } from "~/features/tasks/stores/selectedTask.store";
 
 const route = useRoute();
@@ -81,8 +82,14 @@ const selectedTaskStore = useSelectedTaskStore();
       :title="'Edit Tugas'"
       :state="selectedTaskStore.selectedTask!"
       :refresh-keys="['course-detail']"
-      @reset-form="selectedTaskStore.clearSelectedTask"
-      @submit=""
+      @submit="
+        (payload) =>
+          updateTaskService({
+            ...payload,
+            courseId,
+            taskId: selectedTaskStore.selectedTask!.id,
+          })
+      "
     />
   </UContainer>
 </template>
