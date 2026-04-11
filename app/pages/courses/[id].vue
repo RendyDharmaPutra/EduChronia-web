@@ -1,15 +1,8 @@
 <script setup lang="ts">
-import ConfirmDialog from "~/components/overlay/ConfirmDialog.vue";
 import ErrorState from "~/components/states/ErrorState.vue";
 import LoadingState from "~/components/states/LoadingState.vue";
 import CourseDetailContent from "~/features/courses/components/detail/CourseDetailContent.vue";
 import { readCourseById } from "~/features/courses/services/read-course-by-id.service";
-import TaskFormModal from "~/features/tasks/components/TaskFormModal.vue";
-import { useTaskFormModal } from "~/features/tasks/composables/useTaskFormModal";
-import { createTaskService } from "~/features/tasks/services/create-task.service";
-import { updateTaskService } from "~/features/tasks/services/update-task.service";
-import { deleteTaskService } from "~/features/tasks/services/delete-task.service";
-import { useSelectedTaskStore } from "~/features/tasks/stores/selectedTask.store";
 
 const route = useRoute();
 const courseId = Number(route.params.id);
@@ -33,17 +26,6 @@ const breadcrumbItems = [
     to: `/courses/${courseId}`,
   },
 ];
-
-const {
-  openModal: openCreateModal,
-  formState: createFormState,
-  resetFormState: resetCreateFormState,
-} = useTaskFormModal();
-
-const openEditModal = ref(false);
-const openDeleteModal = ref(false);
-
-const selectedTaskStore = useSelectedTaskStore();
 </script>
 
 <template>
@@ -64,47 +46,6 @@ const selectedTaskStore = useSelectedTaskStore();
       class="self-center"
     />
 
-    <CourseDetailContent
-      v-else
-      @open-create-modal="openCreateModal = true"
-      @open-edit-modal="openEditModal = true"
-      @open-delete-modal="openDeleteModal = true"
-      :courseData="courseResponse!.data"
-    />
-
-    <TaskFormModal
-      v-model:open="openCreateModal"
-      :title="'Tambah Tugas'"
-      :state="createFormState"
-      :refresh-keys="['course-detail']"
-      @reset-form="resetCreateFormState"
-      @submit="(payload) => createTaskService({ ...payload, courseId })"
-    />
-
-    <TaskFormModal
-      v-model:open="openEditModal"
-      :title="'Edit Tugas'"
-      :state="selectedTaskStore.selectedTask!"
-      :refresh-keys="['course-detail']"
-      @submit="
-        (payload) =>
-          updateTaskService({
-            ...payload,
-            courseId,
-            taskId: selectedTaskStore.selectedTask!.id,
-          })
-      "
-    />
-
-    <ConfirmDialog
-      v-model:open="openDeleteModal"
-      title="Hapus Tugas"
-      description="Apakah Anda yakin ingin menghapus tugas ini?"
-      confirmLabel="Hapus"
-      confirmColor="error"
-      :onConfirm="
-        async () => await deleteTaskService(selectedTaskStore.selectedTask!.id)
-      "
-    />
+    <CourseDetailContent v-else :courseData="courseResponse!.data" />
   </UContainer>
 </template>

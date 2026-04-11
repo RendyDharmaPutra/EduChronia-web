@@ -1,10 +1,6 @@
 <script setup lang="ts">
 import ActionButton from "~/components/ui/ActionButton.vue";
 import type { Course } from "../../course.type";
-import CourseFormModal from "../CourseFormModal.vue";
-import ConfirmDialog from "~/components/overlay/ConfirmDialog.vue";
-import { deleteCourseByIdService } from "../../services/delete-course-by-id.service";
-import { updateCourseByIdService } from "../../services/update-course-by-id.service";
 import { useCourseFormModal } from "../../composables/useCourseFormModal";
 
 const props = defineProps<{
@@ -13,13 +9,10 @@ const props = defineProps<{
 
 const hasDescription = !!props.course.description;
 
-const {
-  openModal: openEditModal,
-  formState,
-  resetFormState,
-} = useCourseFormModal(props.course);
-
-const openDeleteModal = ref(false);
+const emit = defineEmits<{
+  (event: "open-edit-modal"): void;
+  (event: "open-delete-modal"): void;
+}>();
 </script>
 
 <template>
@@ -37,14 +30,14 @@ const openDeleteModal = ref(false);
           label="Edit Kursus"
           color="neutral"
           variant="subtle"
-          @click="openEditModal = true"
+          @click="emit('open-edit-modal')"
         />
         <ActionButton
           icon="i-heroicons-trash"
           label="Hapus Kursus"
           color="error"
           variant="subtle"
-          @click="openDeleteModal = true"
+          @click="emit('open-delete-modal')"
         />
       </div>
     </div>
@@ -58,22 +51,4 @@ const openDeleteModal = ref(false);
       }}
     </p>
   </section>
-
-  <ConfirmDialog
-    v-model:open="openDeleteModal"
-    title="Hapus Kursus"
-    description="Apakah Anda yakin ingin menghapus kursus ini?"
-    confirmLabel="Hapus"
-    confirmColor="error"
-    :onConfirm="async () => await deleteCourseByIdService(course.id)"
-  />
-
-  <CourseFormModal
-    v-model:open="openEditModal"
-    :title="'Edit Kursus'"
-    :state="formState"
-    :refresh-keys="['course-list', 'course-detail']"
-    @reset-form="resetFormState"
-    @submit="(payload) => updateCourseByIdService(course.id, payload)"
-  />
 </template>
