@@ -11,6 +11,7 @@ const props = defineProps<{
 const emit = defineEmits<{
   (event: "open-create-modal"): void;
   (event: "open-edit-modal"): void;
+  (event: "open-delete-modal"): void;
 }>();
 </script>
 
@@ -33,6 +34,7 @@ const emit = defineEmits<{
       v-else
       @open-create-modal="emit('open-create-modal')"
       @open-edit-modal="emit('open-edit-modal')"
+      @open-delete-modal="emit('open-delete-modal')"
       :tasks="courseData.tasks"
     />
   </section>

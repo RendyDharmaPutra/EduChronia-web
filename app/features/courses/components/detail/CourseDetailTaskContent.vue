@@ -10,6 +10,7 @@ const props = defineProps<{
 const emit = defineEmits<{
   (event: "open-create-modal"): void;
   (event: "open-edit-modal"): void;
+  (event: "open-delete-modal"): void;
 }>();
 </script>
 
@@ -40,6 +41,7 @@ const emit = defineEmits<{
     <!-- Task List -->
     <CourseDetailTaskList
       @open-edit-modal="emit('open-edit-modal')"
+      @open-delete-modal="emit('open-delete-modal')"
       :tasks="tasks"
     />
 

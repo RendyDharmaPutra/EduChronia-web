@@ -8,6 +8,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (event: "open-edit-modal"): void;
+  (event: "open-delete-modal"): void;
 }>();
 
 const { setSelectedTask } = useSelectedTaskStore();
@@ -58,9 +59,7 @@ const dropdownItems = [
     label: "Delete",
     icon: "i-lucide-trash",
     color: "error" as const,
-    onClick: () => {
-      console.trace("Delete");
-    },
+    onClick: () => emit("open-delete-modal"),
   },
 ];
 </script>

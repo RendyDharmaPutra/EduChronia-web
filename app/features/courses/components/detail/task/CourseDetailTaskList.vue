@@ -8,6 +8,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (event: "open-edit-modal"): void;
+  (event: "open-delete-modal"): void;
 }>();
 </script>
 
@@ -17,6 +18,7 @@ const emit = defineEmits<{
     <!-- Task Card  -->
     <CourseDetailTaskCard
       @open-edit-modal="emit('open-edit-modal')"
+      @open-delete-modal="emit('open-delete-modal')"
       v-for="task in tasks"
       :key="task.id"
       :task="task"

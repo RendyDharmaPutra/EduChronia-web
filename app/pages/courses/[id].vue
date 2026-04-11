@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ConfirmDialog from "~/components/overlay/ConfirmDialog.vue";
 import ErrorState from "~/components/states/ErrorState.vue";
 import LoadingState from "~/components/states/LoadingState.vue";
 import CourseDetailContent from "~/features/courses/components/detail/CourseDetailContent.vue";
@@ -7,6 +8,7 @@ import TaskFormModal from "~/features/tasks/components/TaskFormModal.vue";
 import { useTaskFormModal } from "~/features/tasks/composables/useTaskFormModal";
 import { createTaskService } from "~/features/tasks/services/create-task.service";
 import { updateTaskService } from "~/features/tasks/services/update-task.service";
+import { deleteTaskService } from "~/features/tasks/services/delete-task.service";
 import { useSelectedTaskStore } from "~/features/tasks/stores/selectedTask.store";
 
 const route = useRoute();
@@ -39,6 +41,7 @@ const {
 } = useTaskFormModal();
 
 const openEditModal = ref(false);
+const openDeleteModal = ref(false);
 
 const selectedTaskStore = useSelectedTaskStore();
 </script>
@@ -65,6 +68,7 @@ const selectedTaskStore = useSelectedTaskStore();
       v-else
       @open-create-modal="openCreateModal = true"
       @open-edit-modal="openEditModal = true"
+      @open-delete-modal="openDeleteModal = true"
       :courseData="courseResponse!.data"
     />
 
@@ -89,6 +93,17 @@ const selectedTaskStore = useSelectedTaskStore();
             courseId,
             taskId: selectedTaskStore.selectedTask!.id,
           })
+      "
+    />
+
+    <ConfirmDialog
+      v-model:open="openDeleteModal"
+      title="Hapus Tugas"
+      description="Apakah Anda yakin ingin menghapus tugas ini?"
+      confirmLabel="Hapus"
+      confirmColor="error"
+      :onConfirm="
+        async () => await deleteTaskService(selectedTaskStore.selectedTask!.id)
       "
     />
   </UContainer>
