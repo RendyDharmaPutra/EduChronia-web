@@ -15,6 +15,8 @@ import { useSelectedTaskStore } from "~/features/tasks/stores/selectedTask.store
 import { useCourseFormModal } from "../../composables/useCourseFormModal";
 import CourseFormModal from "../CourseFormModal.vue";
 
+const router = useRouter();
+const toast = useAppToast();
 const route = useRoute();
 const courseId = Number(route.params.id);
 
@@ -27,6 +29,8 @@ const {
   formState: editCourseFormState,
   resetFormState: resetEditCourseFormState,
 } = useCourseFormModal(props.courseData.course);
+const course = props.courseData.course;
+const tasks = props.courseData.tasks;
 
 const openDeleteCourseModal = ref(false);
 
@@ -40,33 +44,57 @@ const openEditTaskModal = ref(false);
 const openDeleteTaskModal = ref(false);
 
 const selectedTaskStore = useSelectedTaskStore();
+
+const handleDeleteCourse = async () => {
+  const result = await deleteCourseByIdService(course.id);
+
+  if (!result.success)
+    toast.error("Gagal menghapus kursus", result.error.message);
+  else {
+    toast.success("Berhasil menghapus kursus");
+    await refreshNuxtData("course-list");
+    router.push("/courses");
+  }
+};
+
+const handleDeleteTask = async () => {
+  const result = await deleteTaskService(selectedTaskStore.selectedTask!.id);
+
+  if (!result.success)
+    toast.error("Gagal menghapus tugas", result.error.message);
+  else {
+    toast.success("Berhasil menghapus tugas");
+    await refreshNuxtData("course-detail");
+    openDeleteTaskModal.value = false;
+  }
+};
 </script>
 
 <template>
   <section class="flex flex-col space-y-12 w-full h-full">
     <CourseDetailInfo
-      :course="courseData.course"
+      :course="course"
       @open-edit-modal="openEditCourseModal = true"
       @open-delete-modal="openDeleteCourseModal = true"
     />
 
     <!-- TODO: Add Handler to open add task modal -->
     <EmptyState
-      v-if="courseData.tasks.length === 0"
+      v-if="tasks.length === 0"
       icon="i-lucide-clipboard-list"
       title="Belum ada tugas"
       description="Mulai perjalanan belajar Anda dengan membuat tugas pertama."
       action-label="Buat Tugas"
-      @action="openCreateTaskModal = true"
       class="self-center"
+      @action="openCreateTaskModal = true"
     />
 
     <CourseDetailTaskContent
       v-else
+      :tasks="tasks"
       @open-create-modal="openCreateTaskModal = true"
       @open-edit-modal="openEditTaskModal = true"
       @open-delete-modal="openDeleteTaskModal = true"
-      :tasks="courseData.tasks"
     />
 
     <!-- Mutate Data Course Modal -->
@@ -76,9 +104,7 @@ const selectedTaskStore = useSelectedTaskStore();
       description="Apakah Anda yakin ingin menghapus kursus ini?"
       confirmLabel="Hapus"
       confirmColor="error"
-      :onConfirm="
-        async () => await deleteCourseByIdService(courseData.course.id)
-      "
+      :onConfirm="handleDeleteCourse"
     />
 
     <CourseFormModal
@@ -123,9 +149,7 @@ const selectedTaskStore = useSelectedTaskStore();
       description="Apakah Anda yakin ingin menghapus tugas ini?"
       confirmLabel="Hapus"
       confirmColor="error"
-      :onConfirm="
-        async () => await deleteTaskService(selectedTaskStore.selectedTask!.id)
-      "
+      :onConfirm="handleDeleteTask"
     />
   </section>
 </template>
