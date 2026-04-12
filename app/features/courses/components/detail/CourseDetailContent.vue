@@ -14,6 +14,8 @@ import { deleteTaskService } from "~/features/tasks/services/delete-task.service
 import { useSelectedTaskStore } from "~/features/tasks/stores/selectedTask.store";
 import { useCourseFormModal } from "../../composables/useCourseFormModal";
 import CourseFormModal from "../CourseFormModal.vue";
+import { completeTaskService } from "~/features/tasks/services/complete-task.service";
+import { uncompleteTaskService } from "~/features/tasks/services/uncomplete-task.service";
 
 const router = useRouter();
 const toast = useAppToast();
@@ -42,6 +44,7 @@ const {
 
 const openEditTaskModal = ref(false);
 const openDeleteTaskModal = ref(false);
+const openToggleCompletionTaskModal = ref(false);
 
 const selectedTaskStore = useSelectedTaskStore();
 
@@ -66,6 +69,20 @@ const handleDeleteTask = async () => {
     toast.success("Berhasil menghapus tugas");
     await refreshNuxtData("course-detail");
     openDeleteTaskModal.value = false;
+  }
+};
+
+const handleToggleCompletionTask = async () => {
+  const result = selectedTaskStore.selectedTask!.isCompleted
+    ? await uncompleteTaskService(selectedTaskStore.selectedTask!.id)
+    : await completeTaskService(selectedTaskStore.selectedTask!.id);
+
+  if (!result.success)
+    toast.error("Gagal mengubah status tugas", result.error.message);
+  else {
+    toast.success("Berhasil mengubah status tugas");
+    await refreshNuxtData("course-detail");
+    openToggleCompletionTaskModal.value = false;
   }
 };
 </script>
@@ -95,6 +112,7 @@ const handleDeleteTask = async () => {
       @open-create-modal="openCreateTaskModal = true"
       @open-edit-modal="openEditTaskModal = true"
       @open-delete-modal="openDeleteTaskModal = true"
+      @open-toggle-completion-modal="openToggleCompletionTaskModal = true"
     />
 
     <!-- Mutate Data Course Modal -->
@@ -150,6 +168,21 @@ const handleDeleteTask = async () => {
       confirmLabel="Hapus"
       confirmColor="error"
       :onConfirm="handleDeleteTask"
+    />
+
+    <ConfirmDialog
+      v-model:open="openToggleCompletionTaskModal"
+      :title="`Tandai ${selectedTaskStore.selectedTask!.isCompleted ? 'Belum Selesai' : 'Selesai'}`"
+      :description="`Apakah Anda yakin ingin menandai tugas ini ${selectedTaskStore.selectedTask!.isCompleted ? 'belum selesai' : 'selesai'}?`"
+      :confirm-label="
+        selectedTaskStore.selectedTask!.isCompleted
+          ? 'Belum Selesai'
+          : 'Selesai'
+      "
+      :confirm-color="
+        selectedTaskStore.selectedTask!.isCompleted ? 'error' : 'success'
+      "
+      :on-confirm="handleToggleCompletionTask"
     />
   </section>
 </template>

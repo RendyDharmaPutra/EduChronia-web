@@ -11,6 +11,7 @@ const emit = defineEmits<{
   (event: "open-create-modal"): void;
   (event: "open-edit-modal"): void;
   (event: "open-delete-modal"): void;
+  (event: "open-toggle-completion-modal"): void;
 }>();
 </script>
 
@@ -40,9 +41,10 @@ const emit = defineEmits<{
     <!-- Main Content -->
     <!-- Task List -->
     <CourseDetailTaskList
+      :tasks="tasks"
       @open-edit-modal="emit('open-edit-modal')"
       @open-delete-modal="emit('open-delete-modal')"
-      :tasks="tasks"
+      @open-toggle-completion-modal="emit('open-toggle-completion-modal')"
     />
 
     <!-- TODO: Task Resume -->

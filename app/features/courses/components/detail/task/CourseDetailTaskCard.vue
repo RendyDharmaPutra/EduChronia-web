@@ -9,9 +9,12 @@ const props = defineProps<{
 const emit = defineEmits<{
   (event: "open-edit-modal"): void;
   (event: "open-delete-modal"): void;
+  (event: "open-toggle-completion-modal"): void;
 }>();
 
 const { setSelectedTask } = useSelectedTaskStore();
+
+const isCompleted = props.task.isCompleted;
 
 const taskStatus = getTaskStatus(props.task);
 
@@ -50,6 +53,11 @@ const colors =
   colorMap[taskStatus.color as keyof typeof colorMap] || colorMap.primary;
 
 const dropdownItems = [
+  {
+    label: isCompleted ? "Tandai Belum Selesai" : "Tandai Selesai",
+    icon: isCompleted ? "i-lucide-x" : "i-lucide-check",
+    onClick: () => emit("open-toggle-completion-modal"),
+  },
   {
     label: "Edit",
     icon: "i-lucide-pencil",
