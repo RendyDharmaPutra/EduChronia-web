@@ -7,5 +7,6 @@ export const formatDateDDMMYYYYHHMM = (date: string): string => {
     year: "numeric",
     hour: "2-digit",
     minute: "2-digit",
+    timeZone: "UTC", // Force timezone to not follow user device
   }).format(d);
 };

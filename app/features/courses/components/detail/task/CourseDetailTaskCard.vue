@@ -62,6 +62,8 @@ const dropdownItems = [
     onClick: () => emit("open-delete-modal"),
   },
 ];
+
+console.debug(props.task.deadline);
 </script>
 
 <template>
