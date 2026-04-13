@@ -172,15 +172,15 @@ const handleToggleCompletionTask = async () => {
 
     <ConfirmDialog
       v-model:open="openToggleCompletionTaskModal"
-      :title="`Tandai ${selectedTaskStore.selectedTask!.isCompleted ? 'Belum Selesai' : 'Selesai'}`"
-      :description="`Apakah Anda yakin ingin menandai tugas ini ${selectedTaskStore.selectedTask!.isCompleted ? 'belum selesai' : 'selesai'}?`"
+      :title="`Tandai ${selectedTaskStore.selectedTask?.isCompleted ? 'Belum Selesai' : 'Selesai'}`"
+      :description="`Apakah Anda yakin ingin menandai tugas ini ${selectedTaskStore.selectedTask?.isCompleted ? 'belum selesai' : 'selesai'}?`"
       :confirm-label="
-        selectedTaskStore.selectedTask!.isCompleted
+        selectedTaskStore.selectedTask?.isCompleted
           ? 'Belum Selesai'
           : 'Selesai'
       "
       :confirm-color="
-        selectedTaskStore.selectedTask!.isCompleted ? 'error' : 'success'
+        selectedTaskStore.selectedTask?.isCompleted ? 'error' : 'success'
       "
       :on-confirm="handleToggleCompletionTask"
     />
