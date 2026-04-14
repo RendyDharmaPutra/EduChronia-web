@@ -10,12 +10,14 @@ const emit = defineEmits<{
   (event: "open-edit-modal"): void;
   (event: "open-delete-modal"): void;
   (event: "open-toggle-completion-modal"): void;
+  (event: "open-task-detail-modal"): void;
 }>();
 
 const { setSelectedTask } = useSelectedTaskStore();
 
 const isCompleted = props.task.isCompleted;
 
+// Badge Status Component
 const taskStatus = getTaskStatus(props.task);
 
 const colorMap = {
@@ -53,6 +55,11 @@ const colors =
   colorMap[taskStatus.color as keyof typeof colorMap] || colorMap.primary;
 
 const dropdownItems = [
+  {
+    label: "Lihat Detail",
+    icon: "i-lucide-eye",
+    onClick: () => emit("open-task-detail-modal"),
+  },
   {
     label: isCompleted ? "Tandai Belum Selesai" : "Tandai Selesai",
     icon: isCompleted ? "i-lucide-x" : "i-lucide-check",

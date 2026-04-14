@@ -16,6 +16,7 @@ import { useCourseFormModal } from "../../composables/useCourseFormModal";
 import CourseFormModal from "../CourseFormModal.vue";
 import { completeTaskService } from "~/features/tasks/services/complete-task.service";
 import { uncompleteTaskService } from "~/features/tasks/services/uncomplete-task.service";
+import TaskDetailModal from "./task/TaskDetailModal.vue";
 
 const router = useRouter();
 const toast = useAppToast();
@@ -45,6 +46,7 @@ const {
 const openEditTaskModal = ref(false);
 const openDeleteTaskModal = ref(false);
 const openToggleCompletionTaskModal = ref(false);
+const openTaskDetailModal = ref(false);
 
 const selectedTaskStore = useSelectedTaskStore();
 
@@ -113,6 +115,12 @@ const handleToggleCompletionTask = async () => {
       @open-edit-modal="openEditTaskModal = true"
       @open-delete-modal="openDeleteTaskModal = true"
       @open-toggle-completion-modal="openToggleCompletionTaskModal = true"
+      @open-task-detail-modal="openTaskDetailModal = true"
+    />
+
+    <TaskDetailModal
+      v-if="selectedTaskStore.selectedTask"
+      v-model:open="openTaskDetailModal"
     />
 
     <!-- Mutate Data Course Modal -->

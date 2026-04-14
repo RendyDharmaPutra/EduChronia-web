@@ -12,6 +12,7 @@ const emit = defineEmits<{
   (event: "open-edit-modal"): void;
   (event: "open-delete-modal"): void;
   (event: "open-toggle-completion-modal"): void;
+  (event: "open-task-detail-modal"): void;
 }>();
 </script>
 
@@ -45,6 +46,7 @@ const emit = defineEmits<{
       @open-edit-modal="emit('open-edit-modal')"
       @open-delete-modal="emit('open-delete-modal')"
       @open-toggle-completion-modal="emit('open-toggle-completion-modal')"
+      @open-task-detail-modal="emit('open-task-detail-modal')"
     />
 
     <!-- TODO: Task Resume -->
