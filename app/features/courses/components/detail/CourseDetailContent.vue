@@ -147,6 +147,7 @@ const handleToggleCompletionTask = async () => {
     />
 
     <TaskFormModal
+      v-if="selectedTaskStore.selectedTask"
       v-model:open="openEditTaskModal"
       :title="'Edit Tugas'"
       :state="selectedTaskStore.selectedTask!"
@@ -162,6 +163,7 @@ const handleToggleCompletionTask = async () => {
     />
 
     <ConfirmDialog
+      v-if="selectedTaskStore.selectedTask"
       v-model:open="openDeleteTaskModal"
       title="Hapus Tugas"
       description="Apakah Anda yakin ingin menghapus tugas ini?"
@@ -171,6 +173,7 @@ const handleToggleCompletionTask = async () => {
     />
 
     <ConfirmDialog
+      v-if="selectedTaskStore.selectedTask"
       v-model:open="openToggleCompletionTaskModal"
       :title="`Tandai ${selectedTaskStore.selectedTask?.isCompleted ? 'Belum Selesai' : 'Selesai'}`"
       :description="`Apakah Anda yakin ingin menandai tugas ini ${selectedTaskStore.selectedTask?.isCompleted ? 'belum selesai' : 'selesai'}?`"
