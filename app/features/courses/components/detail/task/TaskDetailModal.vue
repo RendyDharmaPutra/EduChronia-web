@@ -71,7 +71,7 @@ const { taskStatus, colors } = useTaskStatus(selectedTask);
         <UButton
           label="Tutup"
           color="neutral"
-          variant="solid"
+          variant="soft"
           size="lg"
           class="justify-center w-full"
           @click="emit('update:open', false)"
