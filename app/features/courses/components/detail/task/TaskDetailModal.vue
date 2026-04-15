@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import TaskStatusBadge from "~/features/tasks/components/TaskStatusBadge.vue";
+import { useTaskStatus } from "~/features/tasks/composables/useTaskStatus";
 import { useSelectedTaskStore } from "~/features/tasks/stores/selectedTask.store";
 
 const props = defineProps<{
@@ -9,44 +11,9 @@ const emit = defineEmits<{
   (event: "update:open", value: boolean): void;
 }>();
 
-const selectedTask = useSelectedTaskStore().selectedTask!;
+const selectedTask = computed(() => useSelectedTaskStore().selectedTask!);
 
-// Badge Status Component
-const taskStatus = getTaskStatus(selectedTask);
-
-const colorMap = {
-  success: {
-    borderHover: "hover:border-success/50",
-    bgLight: "bg-success/10",
-    bgHover: "group-hover:bg-success",
-    text: "text-success",
-    badgeBorder: "border-success/30",
-  },
-  neutral: {
-    borderHover: "hover:border-neutral/50",
-    bgLight: "bg-neutral/10",
-    bgHover: "group-hover:bg-neutral",
-    text: "text-neutral",
-    badgeBorder: "border-neutral/30",
-  },
-  error: {
-    borderHover: "hover:border-error/50",
-    bgLight: "bg-error/10",
-    bgHover: "group-hover:bg-error",
-    text: "text-error",
-    badgeBorder: "border-error/30",
-  },
-  primary: {
-    borderHover: "hover:border-primary/50",
-    bgLight: "bg-primary/10",
-    bgHover: "group-hover:bg-primary",
-    text: "text-primary",
-    badgeBorder: "border-primary/30",
-  },
-} as const;
-
-const colors =
-  colorMap[taskStatus.color as keyof typeof colorMap] || colorMap.primary;
+const { taskStatus, colors } = useTaskStatus(selectedTask);
 </script>
 
 <template>
@@ -82,17 +49,7 @@ const colors =
               {{ formatDateDDMMYYYYHHMM(selectedTask.deadline) }}</span
             >
           </span>
-          <span
-            v-if="taskStatus.text"
-            :class="[
-              'px-3 py-1 rounded-full text-xs font-bold border w-fit',
-              colors.bgLight,
-              colors.text,
-              colors.badgeBorder,
-            ]"
-          >
-            {{ taskStatus.text }}
-          </span>
+          <TaskStatusBadge :task-status="taskStatus.text" :colors="colors" />
         </div>
       </div>
     </template>

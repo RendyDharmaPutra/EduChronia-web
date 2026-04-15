@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import TaskStatusBadge from "~/features/tasks/components/TaskStatusBadge.vue";
+import { useTaskStatus } from "~/features/tasks/composables/useTaskStatus";
 import { useSelectedTaskStore } from "~/features/tasks/stores/selectedTask.store";
 import type { Task } from "~/features/tasks/task.type";
 
@@ -17,42 +19,7 @@ const { setSelectedTask } = useSelectedTaskStore();
 
 const isCompleted = props.task.isCompleted;
 
-// Badge Status Component
-const taskStatus = getTaskStatus(props.task);
-
-const colorMap = {
-  success: {
-    borderHover: "hover:border-success/50",
-    bgLight: "bg-success/10",
-    bgHover: "group-hover:bg-success",
-    text: "text-success",
-    badgeBorder: "border-success/30",
-  },
-  neutral: {
-    borderHover: "hover:border-neutral/50",
-    bgLight: "bg-neutral/10",
-    bgHover: "group-hover:bg-neutral",
-    text: "text-neutral",
-    badgeBorder: "border-neutral/30",
-  },
-  error: {
-    borderHover: "hover:border-error/50",
-    bgLight: "bg-error/10",
-    bgHover: "group-hover:bg-error",
-    text: "text-error",
-    badgeBorder: "border-error/30",
-  },
-  primary: {
-    borderHover: "hover:border-primary/50",
-    bgLight: "bg-primary/10",
-    bgHover: "group-hover:bg-primary",
-    text: "text-primary",
-    badgeBorder: "border-primary/30",
-  },
-} as const;
-
-const colors =
-  colorMap[taskStatus.color as keyof typeof colorMap] || colorMap.primary;
+const { taskStatus, colors } = useTaskStatus(props.task);
 
 const dropdownItems = [
   {
@@ -129,17 +96,7 @@ console.debug(props.task.deadline);
     <div
       class="flex self-end sm:self-auto items-center gap-2 md:gap-3.5 shrink-0"
     >
-      <span
-        v-if="taskStatus.text"
-        :class="[
-          'px-3 py-1 rounded-full text-xs font-bold border',
-          colors.bgLight,
-          colors.text,
-          colors.badgeBorder,
-        ]"
-      >
-        {{ taskStatus.text }}
-      </span>
+      <TaskStatusBadge :task-status="taskStatus.text" :colors="colors" />
       <UDropdownMenu :items="dropdownItems">
         <UButton
           icon="i-lucide-more-vertical"
