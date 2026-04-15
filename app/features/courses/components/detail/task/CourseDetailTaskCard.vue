@@ -38,7 +38,7 @@ const dropdownItems = [
     onClick: () => emit("open-edit-modal"),
   },
   {
-    label: "Delete",
+    label: "Hapus",
     icon: "i-lucide-trash",
     color: "error" as const,
     onClick: () => emit("open-delete-modal"),
