@@ -10,9 +10,9 @@ export const useSelectedTaskStore = defineStore("selectedTask", () => {
     const formattedTask = { ...task };
 
     // datetime-local input requires strictly "YYYY-MM-DDThh:mm" format
-    if (formattedTask.deadline && formattedTask.deadline.length >= 16) {
-      formattedTask.deadline = formattedTask.deadline.slice(0, 16);
-    }
+    // if (formattedTask.deadline && formattedTask.deadline.length >= 16) {
+    //   formattedTask.deadline = formattedTask.deadline.slice(0, 16);
+    // }
 
     selectedTask.value = formattedTask;
     console.debug("Selected Task:", selectedTask.value);
