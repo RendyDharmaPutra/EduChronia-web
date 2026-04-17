@@ -17,7 +17,7 @@ const emit = defineEmits<{
 
 const { setSelectedTask } = useSelectedTaskStore();
 
-const isCompleted = props.task.isCompleted;
+const isCompleted = computed(() => props.task.isCompleted);
 
 const { taskStatus, colors } = useTaskStatus(props.task);
 

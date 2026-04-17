@@ -9,11 +9,6 @@ export const useSelectedTaskStore = defineStore("selectedTask", () => {
     // Copy the task to prevent mutating the original prop/object
     const formattedTask = { ...task };
 
-    // datetime-local input requires strictly "YYYY-MM-DDThh:mm" format
-    // if (formattedTask.deadline && formattedTask.deadline.length >= 16) {
-    //   formattedTask.deadline = formattedTask.deadline.slice(0, 16);
-    // }
-
     selectedTask.value = formattedTask;
     console.debug("Selected Task:", selectedTask.value);
   }

@@ -25,7 +25,7 @@ const handleConfirm = async () => {
   if (isConfirming.value) return; // Prevent multiple submissions
   isConfirming.value = true;
 
-  props.onConfirm();
+  await props.onConfirm();
 
   isConfirming.value = false;
 };
