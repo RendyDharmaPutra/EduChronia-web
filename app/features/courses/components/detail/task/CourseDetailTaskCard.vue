@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useTaskModalStore } from "~/features/courses/stores/taskModal.store.ts";
 import TaskStatusBadge from "~/features/tasks/components/TaskStatusBadge.vue";
 import { useTaskStatus } from "~/features/tasks/composables/useTaskStatus";
 import { useSelectedTaskStore } from "~/features/tasks/stores/selectedTask.store";
@@ -16,34 +17,43 @@ const emit = defineEmits<{
 }>();
 
 const { setSelectedTask } = useSelectedTaskStore();
+const taskModalStore = useTaskModalStore();
 
 const isCompleted = computed(() => props.task.isCompleted);
 
 const { taskStatus, colors } = useTaskStatus(props.task);
 
-const dropdownItems = [
+const dropdownItems = computed(() => [
   {
     label: "Lihat Detail",
     icon: "i-lucide-eye",
-    onClick: () => emit("open-task-detail-modal"),
+    onClick: () => {
+      taskModalStore.openTaskDetailModal = true;
+    },
   },
   {
-    label: isCompleted ? "Tandai Belum Selesai" : "Tandai Selesai",
-    icon: isCompleted ? "i-lucide-x" : "i-lucide-check",
-    onClick: () => emit("open-toggle-completion-modal"),
+    label: isCompleted.value ? "Tandai Belum Selesai" : "Tandai Selesai",
+    icon: isCompleted.value ? "i-lucide-x" : "i-lucide-check",
+    onClick: () => {
+      taskModalStore.openToggleCompletionTaskModal = true;
+    },
   },
   {
     label: "Edit",
     icon: "i-lucide-pencil",
-    onClick: () => emit("open-edit-modal"),
+    onClick: () => {
+      taskModalStore.openEditTaskModal = true;
+    },
   },
   {
     label: "Hapus",
     icon: "i-lucide-trash",
     color: "error" as const,
-    onClick: () => emit("open-delete-modal"),
+    onClick: () => {
+      taskModalStore.openDeleteTaskModal = true;
+    },
   },
-];
+]);
 
 console.debug(props.task.deadline);
 </script>

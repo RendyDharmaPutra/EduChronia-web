@@ -2,18 +2,13 @@
 import ActionButton from "~/components/ui/ActionButton.vue";
 import type { Task } from "~/features/tasks/task.type";
 import CourseDetailTaskList from "./task/CourseDetailTaskList.vue";
+import { useTaskModalStore } from "../../stores/taskModal.store.ts";
 
 const props = defineProps<{
   tasks: Task[];
 }>();
 
-const emit = defineEmits<{
-  (event: "open-create-modal"): void;
-  (event: "open-edit-modal"): void;
-  (event: "open-delete-modal"): void;
-  (event: "open-toggle-completion-modal"): void;
-  (event: "open-task-detail-modal"): void;
-}>();
+const taskModalStore = useTaskModalStore();
 </script>
 
 <template>
@@ -35,19 +30,13 @@ const emit = defineEmits<{
         label="Tugas Baru"
         color="primary"
         variant="solid"
-        @click="emit('open-create-modal')"
+        @click="taskModalStore.openCreateTaskModal = true"
       />
     </div>
 
     <!-- Main Content -->
     <!-- Task List -->
-    <CourseDetailTaskList
-      :tasks="tasks"
-      @open-edit-modal="emit('open-edit-modal')"
-      @open-delete-modal="emit('open-delete-modal')"
-      @open-toggle-completion-modal="emit('open-toggle-completion-modal')"
-      @open-task-detail-modal="emit('open-task-detail-modal')"
-    />
+    <CourseDetailTaskList :tasks="tasks" />
 
     <!-- TODO: Task Resume -->
   </section>
