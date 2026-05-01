@@ -6,18 +6,9 @@ export const useSelectedTaskStore = defineStore("selectedTask", () => {
   function setSelectedTask(task: Task) {
     console.debug("Task yang dipilih:", task);
 
-    // Copy the task to prevent mutating the original prop/object
-    const formattedTask = { ...task };
+    task.deadline = new Date(task.deadline).toISOString().slice(0, 16);
 
-    if (formattedTask.deadline) {
-      const date = new Date(formattedTask.deadline);
-      const offset = date.getTimezoneOffset() * 60000;
-      formattedTask.deadline = new Date(date.getTime() - offset)
-        .toISOString()
-        .slice(0, 16);
-    }
-
-    selectedTask.value = formattedTask;
+    selectedTask.value = task;
     console.debug("Selected Task:", selectedTask.value);
   }
 
