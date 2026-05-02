@@ -22,6 +22,15 @@ const emit = defineEmits<{
 const toast = useAppToast();
 const isSubmitting = ref(false);
 
+const state = computed(() => {
+  if (props.state.deadline)
+    return {
+      ...props.state,
+      deadline: new Date(props.state.deadline).toISOString().slice(0, 16),
+    };
+  else return props.state;
+});
+
 const handleSubmit = async (event: FormSubmitEvent<TaskSchemaType>) => {
   if (isSubmitting.value) return; // Prevent multiple submissions
 
