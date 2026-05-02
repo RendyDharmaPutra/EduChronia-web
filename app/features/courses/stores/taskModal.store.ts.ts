@@ -1,5 +1,10 @@
 import { useTaskFormModal } from "~/features/tasks/composables/useTaskFormModal";
 
+/**
+ * Pinia store to manage the state of task-related modals within the course context.
+ * Provides reactive properties to open/close different task modals (create, detail, edit, delete, toggle completion)
+ * and manages the state for the create task form.
+ */
 export const useTaskModalStore = defineStore("taskModal", () => {
   const {
     openModal: openCreateTaskModal,

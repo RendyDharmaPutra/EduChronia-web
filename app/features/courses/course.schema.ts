@@ -1,5 +1,9 @@
 import * as z from "zod";
 
+/**
+ * Zod validation schema for course data.
+ * Ensures that the name and description comply with the specified rules.
+ */
 export const courseSchema = z.object({
   name: z
     .string("Nama tidak boleh kosong")
@@ -11,4 +15,7 @@ export const courseSchema = z.object({
     .optional(),
 });
 
+/**
+ * The TypeScript type inferred from the course validation schema.
+ */
 export type CourseSchemaType = z.infer<typeof courseSchema>;
