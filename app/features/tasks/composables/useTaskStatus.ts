@@ -1,5 +1,8 @@
 import type { Task } from "../task.type";
 
+/**
+ * Defines the color scheme structure used for task status styling.
+ */
 export type TaskStatusColorScheme = {
   borderHover: string;
   bgLight: string;
@@ -8,6 +11,10 @@ export type TaskStatusColorScheme = {
   badgeBorder: string;
 };
 
+/**
+ * Color mapping based on semantic status names (success, neutral, error, primary).
+ * Used to get the corresponding Tailwind CSS class scheme.
+ */
 const colorMap = {
   success: {
     borderHover: "hover:border-success/50",
@@ -39,6 +46,12 @@ const colorMap = {
   },
 } satisfies Record<string, TaskStatusColorScheme>;
 
+/**
+ * Composable to derive reactive task status and its color scheme.
+ * 
+ * @param task - The task data which can be a direct object, a Ref, or a getter function.
+ * @returns An object containing the computed `taskStatus` and computed `colors` scheme.
+ */
 export const useTaskStatus = (task: MaybeRefOrGetter<Task>) => {
   const taskStatus = computed(() => getTaskStatus(toValue(task)));
 

@@ -1,5 +1,9 @@
 import * as z from "zod";
 
+/**
+ * Zod validation schema for task data.
+ * Ensures that the title, description, and deadline comply with the specified rules.
+ */
 export const taskSchema = z.object({
   title: z
     .string({ error: "Judul tidak boleh kosong" })
@@ -15,4 +19,7 @@ export const taskSchema = z.object({
   isCompleted: z.boolean().default(false),
 });
 
+/**
+ * The TypeScript type inferred from the task validation schema.
+ */
 export type TaskSchemaType = z.infer<typeof taskSchema>;
