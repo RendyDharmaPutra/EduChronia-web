@@ -6,9 +6,11 @@ export const useSelectedTaskStore = defineStore("selectedTask", () => {
   function setSelectedTask(task: Task) {
     console.debug("Task yang dipilih:", task);
 
-    task.deadline = new Date(task.deadline).toISOString().slice(0, 16);
+    const deadline = new Date(task.deadline).toISOString().slice(0, 16);
 
-    selectedTask.value = task;
+    console.debug("deadline: ", deadline);
+
+    selectedTask.value = { ...task, deadline };
     console.debug("Selected Task:", selectedTask.value);
   }
 
