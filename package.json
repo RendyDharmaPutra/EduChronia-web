@@ -1,5 +1,8 @@
 {
+  "version": "1.0.0",
   "name": "EduChronia-web",
+  "description": "Web service for EduChronia",
+  "author": "Archilst",
   "private": true,
   "type": "module",
   "scripts": {
