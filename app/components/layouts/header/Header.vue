@@ -11,7 +11,7 @@ const emit = defineEmits<{
 <template>
   <UHeader
     mode="slideover"
-    class="backdrop-blur-md bg-[var(--color-paper-bg)]/80 dark:bg-obsidian-900/80 border-b border-[var(--color-paper-outline)] dark:border-obsidian-100/10 transition-colors duration-200"
+    class="backdrop-blur-md bg-paper-bg/80 dark:bg-obsidian-900/80 border-b border-paper-outline dark:border-obsidian-100/10 transition-colors duration-200"
   >
     <template #title>
       <AppTitle />
