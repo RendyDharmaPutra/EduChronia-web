@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { signOut } from "~/features/auth/services/sign-out.service";
 
+const emit = defineEmits<{
+  (e: "open-sign-out-modal"): void;
+}>();
+
 const authStore = useAuthStore();
 const { user } = storeToRefs(authStore);
 
@@ -17,7 +21,7 @@ const dropdownMenuitems = [
       label: "Keluar",
       icon: "i-lucide-log-out",
       color: "error",
-      onClick: signOut,
+      onClick: () => emit("open-sign-out-modal"),
     },
   ],
 ];

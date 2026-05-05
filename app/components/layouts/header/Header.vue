@@ -2,6 +2,10 @@
 import Navbar from "./Navbar.vue";
 import HeaderActions from "./HeaderActions.vue";
 import AppTitle from "~/components/AppTitle.vue";
+
+const emit = defineEmits<{
+  (e: "open-sign-out-modal"): void;
+}>();
 </script>
 
 <template>
@@ -16,7 +20,7 @@ import AppTitle from "~/components/AppTitle.vue";
     <template #right>
       <Navbar class="lg:mr-8 xl:mr-12 hidden lg:flex" />
 
-      <HeaderActions />
+      <HeaderActions @open-sign-out-modal="emit('open-sign-out-modal')" />
     </template>
 
     <template #body>
