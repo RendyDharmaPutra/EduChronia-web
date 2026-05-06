@@ -3,11 +3,16 @@ definePageMeta({
   middleware: "auth",
 });
 
-usePageMeta({
-  title: "Tugas",
-});
+// usePageMeta({
+//   title: "Tugas",
+// });
+
+const router = useRouter();
+
+// redirect to /courses
+router.replace("/courses");
 </script>
 
-<template>
+<!-- <template>
   <NuxtLink to="/">Dashboard</NuxtLink>
-</template>
+</template> -->
