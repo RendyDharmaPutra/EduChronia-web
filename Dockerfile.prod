@@ -14,6 +14,14 @@ RUN bun install --frozen-lockfile
 # Copy source code
 COPY . .
 
+# Define build arguments for Nuxt SPA config injection
+ARG NUXT_PUBLIC_APP_URL
+ARG NUXT_PUBLIC_HOST_API_BASE_URL
+
+# Set environment variables for the build process
+ENV NUXT_PUBLIC_APP_URL=${NUXT_PUBLIC_APP_URL}
+ENV NUXT_PUBLIC_HOST_API_BASE_URL=${NUXT_PUBLIC_HOST_API_BASE_URL}
+
 # Build Nuxt
 RUN bun run build
 

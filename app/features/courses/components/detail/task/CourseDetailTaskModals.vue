@@ -18,13 +18,6 @@ const toast = useAppToast();
 const selectedTaskStore = useSelectedTaskStore();
 const taskModalStore = useTaskModalStore();
 
-watch(
-  () => selectedTaskStore.selectedTask,
-  () => {
-    console.debug(selectedTaskStore.selectedTask);
-  },
-);
-
 const handleDeleteTask = async () => {
   const result = await deleteTaskService(selectedTaskStore.selectedTask!.id);
 

@@ -27,6 +27,7 @@ export const getAuthUser = async (): Promise<
     return {
       success: true,
       data: user,
+      meta: undefined,
     };
   } catch (error) {
     // TODO: Don't consider it as unauthenticated for error cases yet

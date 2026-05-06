@@ -9,6 +9,6 @@ export const signOut = async () => {
 
     navigateTo("/sign-in");
   } catch (error) {
-    console.error(error);
+    console.error("[AuthService] signOut failed", error);
   }
 };

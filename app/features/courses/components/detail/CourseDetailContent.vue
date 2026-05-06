@@ -52,7 +52,6 @@ const taskModalStore = useTaskModalStore();
       @open-delete-modal="openDeleteCourseModal = true"
     />
 
-    <!-- TODO: Add Handler to open add task modal -->
     <EmptyState
       v-if="tasks.length === 0"
       icon="i-lucide-clipboard-list"

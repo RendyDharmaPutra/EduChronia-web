@@ -1,5 +1,8 @@
 {
+  "version": "1.0.0",
   "name": "EduChronia-web",
+  "description": "Web service for EduChronia",
+  "author": "Archilst",
   "private": true,
   "type": "module",
   "scripts": {
@@ -26,5 +29,5 @@
     "typescript": "^5.9.3",
     "vue-tsc": "^3.2.1"
   },
-  "packageManager": "pnpm@10.26.1"
+  "packageManager": "bun@1.3.11"
 }

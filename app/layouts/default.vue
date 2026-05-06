@@ -5,13 +5,6 @@ import ConfirmDialog from "~/components/overlay/ConfirmDialog.vue";
 import { signOut } from "~/features/auth/services/sign-out.service";
 
 const openSignOutModal = ref(false);
-
-watch(
-  () => openSignOutModal.value,
-  (newValue) => {
-    console.log(newValue);
-  },
-);
 </script>
 
 <template>

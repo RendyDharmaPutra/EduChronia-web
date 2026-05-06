@@ -24,7 +24,6 @@ const taskModalStore = useTaskModalStore();
         </h3>
       </div>
 
-      <!-- TODO: Add Handler to open add task modal -->
       <ActionButton
         icon="i-lucide-plus"
         label="Tugas Baru"
