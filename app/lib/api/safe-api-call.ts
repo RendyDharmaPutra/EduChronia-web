@@ -23,13 +23,13 @@ export async function safeApiCall<T, F = undefined>(
     if (error instanceof FetchError && error.response?._data) {
       const apiError = error.response._data as ApiFailed;
 
-      console.error("API ERROR:", apiError.error);
+      console.error("[SafeApiCall] API ERROR:", apiError.error);
 
       return apiError;
     }
 
     // Unexpected error (such as network error)
-    console.error("UNEXPECTED API ERROR:", error);
+    console.error("[SafeApiCall] UNEXPECTED API ERROR:", error);
 
     return {
       success: false,
