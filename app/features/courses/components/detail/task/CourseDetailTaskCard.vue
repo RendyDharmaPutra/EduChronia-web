@@ -57,7 +57,6 @@ const dropdownItems = computed(() => [
 </script>
 
 <template>
-  <!-- TODO: Add Handler to open task modal -->
   <div
     :class="[
       'group p-3.5 md:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-0 bg-white dark:bg-default/20 border border-muted/60 dark:border-muted/35 rounded-xl duration-300 cursor-pointer',
