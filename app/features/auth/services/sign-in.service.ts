@@ -9,6 +9,6 @@ export const signIn = async () => {
       callbackURL: config.public.appUrl,
     });
   } catch (error) {
-    console.error(error);
+    console.error("[AuthService] signIn failed", error);
   }
 };
