@@ -10,14 +10,11 @@ export const useSelectedTaskStore = defineStore("selectedTask", () => {
 
   /**
    * Sets the selected task.
-   * 
+   *
    * @param task - The task object to select.
    */
   function setSelectedTask(task: Task) {
-    console.debug("Task yang dipilih:", task);
-
     selectedTask.value = task;
-    console.debug("Selected Task:", selectedTask.value);
   }
 
   /**

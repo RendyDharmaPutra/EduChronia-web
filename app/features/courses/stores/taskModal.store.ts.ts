@@ -17,13 +17,6 @@ export const useTaskModalStore = defineStore("taskModal", () => {
   const openDeleteTaskModal = ref(false);
   const openToggleCompletionTaskModal = ref(false);
 
-  watch(
-    () => openCreateTaskModal.value,
-    () => {
-      console.debug(openCreateTaskModal.value);
-    },
-  );
-
   return {
     openCreateTaskModal,
     createTaskFormState,

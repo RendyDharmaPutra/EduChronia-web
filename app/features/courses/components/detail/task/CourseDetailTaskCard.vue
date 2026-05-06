@@ -54,8 +54,6 @@ const dropdownItems = computed(() => [
     },
   },
 ]);
-
-console.debug(props.task.deadline);
 </script>
 
 <template>
